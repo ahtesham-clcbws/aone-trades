@@ -38,6 +38,16 @@ use App\Livewire\Admin\User\KYC\Details as UserKycDetails;
 use App\Livewire\Admin\Visitors as PageViews;
 use App\Livewire\Admin\Settings\Help as AdminHelpSection;
 use App\Livewire\Admin\Settings\Downloads as AdminDownloadsSection;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('artisan/{command}', function ($command) {
+    try {
+        $run = Artisan::call($command);
+        return print_r($run);
+    } catch (\Throwable $th) {
+        throw $th;
+    }
+});
 
 Route::any('test', function () {
     return print_r([
