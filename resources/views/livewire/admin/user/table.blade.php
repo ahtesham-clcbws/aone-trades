@@ -31,10 +31,62 @@
 
             @scope('cell_actions', $user)
             <div class="flex gap-2">
-                <x-mary-button class="btn-circle btn-sm bg-orange-500" title="Ban User"><x-mary-icon name="bi.ban" /></x-mary-button>
-                <x-mary-button icon="o-trash" class="btn-circle btn-sm btn-error" title="Delete" />
+                <x-mary-button icon="o-eye" class="btn-circle btn-sm bg-blue-500" title="View User" wire:click="viewUser('{{$user->id}}')" />
             </div>
             @endscope
         </x-mary-table>
     </x-mary-card>
+
+    <x-mary-modal wire:model="showUserDetailsModal" class="backdrop-blur">
+        <div class="w-full">
+            <table class="customTable w-full">
+                <tr>
+                    <td><b>Name: </b></td>
+                    <td>{{ $thisUser?->name??'N/A' }}</td>
+                </tr>
+                <tr>
+                    <td><b>Email: </b></td>
+                    <td>{{ $thisUser?->email??'N/A' }}</td>
+                </tr>
+                <tr>
+                    <td><b>Phone Number: </b></td>
+                    <td>{{ $thisUser?->phone_number??'N/A' }}</td>
+                </tr>
+                <tr>
+                    <td><b>Plan: </b></td>
+                    <td>{{ $thisUser?->package??'N/A' }}</td>
+                </tr>
+                <tr>
+                    <td><b>Date of Birth: </b></td>
+                    <td>{{ $thisUser?->date_of_birth ? date('d M, Y', strtotime($thisUser?->date_of_birth)) : 'N/A' }}</td>
+                </tr>
+                <tr>
+                    <td><b>Gender: </b></td>
+                    <td>{{ $thisUser?->gender??'N/A' }}</td>
+                </tr>
+                <tr>
+                    <td><b>Time Zone: </b></td>
+                    <td>{{ $thisUser?->timezone??'N/A' }}</td>
+                </tr>
+                <tr>
+                    <td><b>Address: </b></td>
+                    <td>{{ $thisUser?->address??'N/A' }}</td>
+                </tr>
+                <tr>
+                    <td><b>Pincode: </b></td>
+                    <td>{{ $thisUser?->pincode??'N/A' }}</td>
+                </tr>
+                <tr>
+                    <td><b>City/State/Country: </b></td>
+                    <td>{{ $thisUser?->city??'-' }} / {{ $thisUser?->state??'-' }} / {{ $thisUser?->country??'-' }} </td>
+                </tr>
+
+                @if ($thisUser?->profile_photo_path)
+                <tr>
+                    <td colspan="2"><img src="{{ $thisUser->profile_photo_url }}" class="w-full h-auto" /></td>
+                </tr>
+                @endif
+            </table>
+        </div>
+    </x-mary-modal>
 </div>

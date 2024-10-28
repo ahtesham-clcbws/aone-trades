@@ -7,11 +7,23 @@ use Livewire\Component;
 
 use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
+use Mary\Traits\Toast;
 
 #[Layout('admin.layouts.admin')]
 class Requests extends Component
 {
+    use Toast;
     use WithPagination;
+    public $perPage = 10;
+
+    public $showRejectPanel = false;
+
+    public $rejectMessage = null;
+    public $rejectId = null;
+
+    public $showKycModal = false;
+    public UserKyc $userKyc;
+
     public function render()
     {
         $headers = [
@@ -29,5 +41,15 @@ class Requests extends Component
             'headers' => $headers,
             'data' => $data
         ]);
+    }
+    public function viewRequest($id)
+    {
+        try {
+            $kyc = UserKyc::find($id);
+            $this->userKyc = $kyc;
+            $this->showKycModal = true;
+        } catch (\Throwable $th) {
+            $this->error($th->getMessage());
+        }
     }
 }

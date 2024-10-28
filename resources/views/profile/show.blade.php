@@ -13,11 +13,13 @@
             <x-section-border />
             @endif
 
+            @if (auth()->user()->role == 'user')
             <livewire:user.profile.update.preferences />
             <x-section-border />
 
             <livewire:user.profile.update.package />
             <x-section-border />
+            @endif
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
             <div class="mt-10 sm:mt-0">

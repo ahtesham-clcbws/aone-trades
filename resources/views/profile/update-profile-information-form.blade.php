@@ -78,6 +78,7 @@
             @endif
         </div>
 
+        @if (auth()->user()->role == 'user')
         <!-- PhoneNumber -->
         <div class="col-span-6 sm:col-span-4">
             <x-mary-input label="Phone Number" id="phone_number" type="tel" class="mt-1 block w-full input-sm" wire:model="state.phone_number" required autocomplete="tel" />
@@ -96,10 +97,11 @@
             <x-input-error for="gender" class="mt-2" />
         </div>
 
-        <!-- LastName -->
+        <!-- DOB -->
         <div class="col-span-6 sm:col-span-4">
             <x-mary-input label="Bate of Birth" id="date_of_birth" type="date" class="mt-1 block w-full input-sm" wire:model="state.date_of_birth" required autocomplete="dob" />
         </div>
+        @endif
     </x-slot>
 
     <x-slot name="actions">

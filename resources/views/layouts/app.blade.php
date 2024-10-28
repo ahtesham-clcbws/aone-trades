@@ -165,6 +165,8 @@
     {{-- TOAST area --}}
     <x-mary-toast />
 
+    <livewire:user.kyc-information />
+
     @stack('modals')
 
     @livewireScripts

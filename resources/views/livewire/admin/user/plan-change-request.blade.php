@@ -7,27 +7,53 @@
 
     <x-mary-card>
         <x-mary-table :headers="$headers" :rows="$data" with-pagination>
-            @scope('cell_status', $deposit)
-            <x-mary-badge value="{{ ucfirst($deposit->status) }}" class="badge-{{ $deposit->status == 'rejected' ? 'error' : ($deposit->status == 'approved' ? 'success' : 'warning') }}" />
-            @if ($deposit->status == 'rejected' && $deposit->reject_notes)
-            <span class="text-red-500">{{ $deposit->reject_notes }}</span>
-            @endif
-            @endscope
 
-            @scope('cell_id', $deposit)
+            @scope('cell_id', $request)
             {{ $loop->index + 1 }}
             @endscope
 
-            @scope('cell_created_at', $deposit)
-            {{ date('d-M-Y h:i A', strtotime($deposit->created_at)) }}
+            @scope('cell_user.name', $withdrawal)
+            {{ $withdrawal->user->name }}<br />
+            {{ $withdrawal->user->email }}
             @endscope
 
-            @scope('cell_actions', $entity)
+            @scope('cell_status', $request)
+            <x-mary-badge value="{{ ucfirst($request->status) }}" class="badge-{{ $request->status == 'rejected' ? 'error' : ($request->status == 'approved' ? 'success' : 'warning') }}" />
+            @if ($request->status == 'rejected' && $request->reject_notes)
+            <br /><span class="text-red-500">{{ $request->reject_notes }}</span>
+            @endif
+            @endscope
+
+            @scope('cell_created_at', $request)
+            {{ date('d-M-Y h:i A', strtotime($request->created_at)) }}
+            @endscope
+
+            @scope('cell_actions', $request)
             <div class="flex gap-2">
-                <x-mary-button icon="o-check" class="btn-circle btn-sm btn-success" title="Approve" />
-                <x-mary-button icon="o-x-mark" class="btn-circle btn-sm btn-error" title="Reject" />
+                @if ($request->status != 'approved')
+                <x-mary-button icon="o-check" type="button" class="btn-circle btn-sm btn-success" title="Approve" spinner="approve({{$request->id}})" wire:click="approve({{$request->id}})" />
+                @endif
+                @if ($request->status != 'rejected')
+                <x-mary-button icon="o-x-mark" type="button" class="btn-circle btn-sm btn-error" title="Reject" wire:click="openRejectPanel({{$request->id}})" />
+                @endif
+                <x-mary-button icon="o-trash" type="button" class="btn-circle btn-sm btn-secondary" title="Delete" spinner="delete({{$request->id}})" wire:click="delete({{$request->id}})" />
             </div>
             @endscope
         </x-mary-table>
     </x-mary-card>
+    <x-mary-modal wire:model="showRejectPanel" class="backdrop-blur" persistent>
+        <x-mary-form wire:submit="reject" no-separator>
+            <x-mary-textarea
+                label="Reject Notes/Comments"
+                wire:model="rejectMessage"
+                rows="3"
+                inline
+                class="leading-snug" />
+
+            <x-slot:actions>
+                <x-mary-button label="Reject" class="btn-error" type="submit" spinner="reject" />
+                <x-mary-button label="Close" wire:click="closeRejectPanel()" />
+            </x-slot:actions>
+        </x-mary-form>
+    </x-mary-modal>
 </div>

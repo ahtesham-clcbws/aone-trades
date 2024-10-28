@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make(23988725),
                 'role' => 'developer',
                 'gender' => 'Male',
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now(),
+                'email_verified_at' => Carbon::now()
             ],
             [
                 'firstname' => 'Ahtesham',
@@ -32,7 +33,8 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make(23988725),
                 'role' => 'admin',
                 'gender' => 'Male',
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now(),
+                'email_verified_at' => Carbon::now()
             ],
             [
                 'firstname' => 'Ahtesham',

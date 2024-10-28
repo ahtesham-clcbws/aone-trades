@@ -151,8 +151,8 @@ class Kyc extends Component
             $userKyc->save();
 
             $this->success('KYC submitted successfully');
-            // refresh the page after submit
-            $this->reset();
+            $this->redirect('/user/account/kyc');
+            // user/account/kyc
         } catch (\Throwable $th) {
             $this->error($th->getMessage());
         }
