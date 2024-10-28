@@ -54,9 +54,9 @@
                     <x-slot name="content">
                         <div class="block px-4 py-2 text-xs font-semibold border-b">
                             {{ __('Notifications') }}
-                        </div>
-                    </x-slot>
-                </x-dropdown>
+            </div>
+            </x-slot>
+            </x-dropdown>
             </div>--}}
             <div class="ms-1 relative">
                 <x-dropdown align="right" width="48">
@@ -125,7 +125,10 @@
                     <x-mary-badge value="{{$user->getKycStatusBadgeData()['value']}}" class="{{$user->getKycStatusBadgeData()['class']}}" />
                 </x-slot:sub-value>
                 <x-slot:actions>
-                    <x-mary-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff" no-wire-navigate link="/logout" />
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <x-mary-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff" no-wire-navigate type="submit" />
+                    </form>
                 </x-slot:actions>
             </x-mary-list-item>
 

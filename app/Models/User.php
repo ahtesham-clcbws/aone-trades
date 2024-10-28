@@ -76,6 +76,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function transfer_details()
+    {
+        return $this->hasMany(UserTransferDetail::class);
+    }
+
     public function kyc()
     {
         return $this->hasOne(UserKyc::class);

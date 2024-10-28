@@ -39,6 +39,7 @@ use App\Livewire\Admin\Visitors as PageViews;
 use App\Livewire\Admin\Settings\Help as AdminHelpSection;
 use App\Livewire\Admin\Settings\Downloads as AdminDownloadsSection;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('artisan/{command}', function ($command) {
     try {
@@ -56,6 +57,7 @@ Route::any('test', function () {
     ]);
 });
 Route::get('/', Homepage::class)->name('homepage');
+
 Route::get('info', Info::class)->name('info');
 Route::get('account-type', AccountType::class)->name('accountType');
 Route::get('id-partner', IbPartner::class)->name('ibPartner');

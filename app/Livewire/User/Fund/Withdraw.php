@@ -18,21 +18,67 @@ class Withdraw extends Component
 
     #[Validate('required|current_password:web')]
     public $password;
-
     #[Validate('required')]
     public $amount;
-
     #[Validate('nullable|string')]
     public $comments;
+    #[Validate('required')]
+    public $type;
+
+    public $transferDetails = [];
+    public $transferTypeAlreadyAdded = [];
+    public $typeOptions = [
+        [
+            'id' => 'Bank',
+            'name' => 'Bank'
+        ],
+        [
+            'id' => 'UPI',
+            'name' => 'UPI'
+        ],
+        [
+            'id' => 'USDT',
+            'name' => 'USDT'
+        ]
+    ];
+
+    public function mount(#[CurrentUser] User $user)
+    {
+        $this->transferDetails = $user->transfer_details;
+        if (count($user->transfer_details)) {
+            foreach ($user->transfer_details as $transfer_detail) {
+                $this->transferTypeAlreadyAdded[] = $transfer_detail->type;
+            }
+            foreach ($this->typeOptions as $key => $typeOption) {
+                if (in_array($typeOption['name'], $this->transferTypeAlreadyAdded)) {
+                    $this->typeOptions[$key] = [
+                        'id' => $typeOption['id'],
+                        'name' => $typeOption['name'],
+                        'disabled' => false
+                    ];
+                } else {
+                    $this->typeOptions[$key] = [
+                        'id' => $typeOption['id'],
+                        'name' => $typeOption['name'],
+                        'disabled' => true
+                    ];
+                }
+            }
+        }
+    }
 
     public function save(#[CurrentUser] User $user)
     {
+        if(!count($this->transferTypeAlreadyAdded)){
+            return $this->error('You don\'t have any mode selected.' );
+        }
         try {
             $this->validate();
 
             UserWithdrawl::create([
                 'user_id' => $user->id,
                 'amount' => $this->amount,
+                'type' => $this->type,
                 'user_comments' => $this->comments,
             ]);
 

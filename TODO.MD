@@ -6,3 +6,9 @@ XnQfjUIHLC-XEHHSQbkuH
 42g1sRIY9b-hZFHhlvZrU
 OHYZSYgdZD-Vwppn1ORCk
 YgYTZ1rYkS-jgzQMPqCbf
+
+add global user transfer details for withdrawal
+
+email password recovery
+email notifications for admin (registration, deposit, withdrawal)
+email notifications for client (registration, deposit, withdrawal)

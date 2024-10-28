@@ -16,13 +16,17 @@
                 <x-mary-input placeholder="Enter amount in dollars" type="number" wire:model="amount" prefix="$" required />
                 <x-mary-password placeholder="Password" wire:model="password" clearable required />
             </div>
-            <x-mary-textarea
-                wire:model="comments"
-                placeholder="Comments"
-                rows="3"
-                inline />
+            <x-mary-textarea wire:model="comments" placeholder="Comments" rows="3" inline class="leading-snug"/>
+            <div>
+                @if (count($transferTypeAlreadyAdded))
+                <x-mary-radio label="Select mode" :options="$typeOptions" wire:model.live="type" required />
+                @else
+                Not transfer details found, please add Bank account, UPI or USDT to profile to proceed with withdrawals.<br />
+                <x-mary-button class="btn-secondary btn-sm" link="{{ route('user.account.profile') }}" label="Go to Profile" icon="o-user" />
+                @endif
+            </div>
             <div class="">
-                <x-mary-button label="Submit Request" class="btn-primary" type="submit" spinner="save" />
+                <x-mary-button label="Submit Request" class="btn-primary mt-3" type="submit" spinner="save" />
             </div>
         </x-mary-form>
     </x-mary-card>

@@ -24,7 +24,7 @@
     <x-banner />
 
     {{-- The navbar with `sticky` and `full-width` --}}
-    <x-mary-nav sticky full-width>
+    <x-mary-nav sticky full-width class="bg-primary/50">
 
         <x-slot:brand>
             {{-- Drawer toggle for "main-drawer" --}}
@@ -37,7 +37,7 @@
                 <img src="/img/w-logo.png" alt="logo" width="180">
             </div>
             <div class="ms-5 hidden lg:block text-center w-full text-xl font-semibold">
-                <livewire:panel.current-date />
+                Welcome Admin!
             </div>
         </x-slot:brand>
 
@@ -107,7 +107,10 @@
             @if($user = auth()->user())
             <x-mary-list-item :item="$user" value="name" sub-value="email" no-separator no-hover class="pt-2">
                 <x-slot:actions>
-                    <x-mary-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff" no-wire-navigate link="/logout" />
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+                        <x-mary-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff" no-wire-navigate type="submit" />
+                    </form>
                 </x-slot:actions>
             </x-mary-list-item>
 
@@ -115,25 +118,7 @@
             @endif
 
             {{-- Activates the menu item when a route matches the `link` property --}}
-            <x-mary-menu activate-by-route>
-                <x-mary-menu-item title="Dashboard" icon="o-home" link="{{ route('admin.dashboard') }}" />
-
-                <x-mary-menu-item title="Deposit Records" icon="o-document-currency-rupee" link="{{ route('admin.deposit.requests') }}" />
-                <x-mary-menu-item title="Withdrawal Requests" icon="o-circle-stack" link="{{ route('admin.withdrawal.requests') }}" />
-
-                <x-mary-menu-sub title="User Management" icon="o-users">
-                    <x-mary-menu-item title="Manage Users" link="{{ route('admin.user.table') }}" />
-                    <x-mary-menu-item title="Plan Change Requests" link="{{ route('admin.user.plans') }}" />
-                    <x-mary-menu-item title="KYC Requests" link="{{ route('admin.user.kyc.requests') }}" />
-                </x-mary-menu-sub>
-
-                <x-mary-menu-item title="View Visitors" icon="o-chart-bar-square" link="{{ route('admin.visitors') }}" />
-
-                <x-mary-menu-sub title="Settings" icon="o-cog-6-tooth">
-                    <x-mary-menu-item title="Help/Support Section" link="{{ route('admin.settings.help') }}" />
-                    <x-mary-menu-item title="Downloads Section" link="{{ route('admin.settings.downloads') }}" />
-                </x-mary-menu-sub>
-            </x-mary-menu>
+            <livewire:admin.partials.sidebar />
         </x-slot:sidebar>
 
         {{-- The `$slot` goes here --}}
