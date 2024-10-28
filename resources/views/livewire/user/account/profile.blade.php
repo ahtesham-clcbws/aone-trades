@@ -168,15 +168,4 @@
             </x-slot:actions>
         </x-mary-form>
     </x-mary-modal>
-    <style>
-        .customTable,
-        .customTable th,
-        .customTable td {
-            border: 1px solid lightgray;
-            border-collapse: collapse;
-        }
-        .customTable td {
-            padding: 2px 8px;
-        }
-    </style>
 </div>

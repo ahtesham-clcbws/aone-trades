@@ -116,7 +116,7 @@ class User extends Authenticatable
             $class = 'badge-success';
         }
         if ($status == 'rejected') {
-            $class = 'badge-danger';
+            $class = 'badge-error';
         }
         return [
             'value' => ucfirst($status),

@@ -8,7 +8,7 @@
     <x-mary-card>
         <x-mary-table :headers="$headers" :rows="$data" with-pagination>
             @scope('cell_status', $deposit)
-            <x-mary-badge value="{{ ucfirst($deposit->status) }}" class="badge-{{ $deposit->status == 'rejected' ? 'danger' : ($deposit->status == 'approved' ? 'success' : 'warning') }}" />
+            <x-mary-badge value="{{ ucfirst($deposit->status) }}" class="badge-{{ $deposit->status == 'rejected' ? 'error' : ($deposit->status == 'approved' ? 'success' : 'warning') }}" />
             @if ($deposit->status == 'rejected' && $deposit->reject_notes)
             <span class="text-red-500">{{ $deposit->reject_notes }}</span>
             @endif

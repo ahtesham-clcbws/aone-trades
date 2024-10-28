@@ -13,7 +13,7 @@
             @endscope
 
             @scope('cell_status', $user)
-            <x-mary-badge value="{{ ucfirst($user->status) }}" class="badge-{{ $user->status == 'rejected' ? 'danger' : ($user->status == 'approved' ? 'success' : 'warning') }}" />
+            <x-mary-badge value="{{ ucfirst($user->status) }}" class="badge-{{ $user->status == 'rejected' ? 'error' : ($user->status == 'approved' ? 'success' : 'warning') }}" />
             @if ($user->status == 'rejected' && $user->reject_notes)
             <span class="text-red-500">{{ $user->reject_notes }}</span>
             @endif
