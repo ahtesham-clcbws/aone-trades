@@ -11,45 +11,31 @@
 
         <!-- Time Zone -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="timezone" value="{{ __('Time Zone') }}" />
-            <x-input id="timezone" type="text" class="mt-1 block w-full" wire:model="timezone" required />
-            <x-input-error for="timezone" class="mt-2" />
+            <x-mary-input label="Time Zone" id="timezone" type="text" class="mt-1 block w-full input-sm" wire:model="timezone" readonly />
         </div>
         <!-- Address -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="address" value="{{ __('Address') }}" />
-            <x-input id="address" type="text" class="mt-1 block w-full" wire:model="address" required />
-            <x-input-error for="address" class="mt-2" />
+            <x-mary-input label="Address" id="address" type="text" class="mt-1 block w-full input-sm" wire:model="address" required />
         </div>
         <!-- City -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="city" value="{{ __('City') }}" />
-            <x-input id="city" type="text" class="mt-1 block w-full" wire:model="city" required />
-            <x-input-error for="city" class="mt-2" />
+            <x-mary-input label="City" id="city" type="text" class="mt-1 block w-full input-sm" wire:model="city" required />
         </div>
         <!-- State/Province -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="state" value="{{ __('State/Province') }}" />
-            <x-input id="state" type="text" class="mt-1 block w-full" wire:model="state" required />
-            <x-input-error for="state" class="mt-2" />
+            <x-mary-input label="State/Province" id="state" type="text" class="mt-1 block w-full input-sm" wire:model="state" required />
         </div>
         <!-- Country -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="country" value="{{ __('Country') }}" />
-            <x-input id="country" type="text" class="mt-1 block w-full" wire:model="country" required />
-            <x-input-error for="country" class="mt-2" />
+            <x-mary-input label="Country" id="country" type="text" class="mt-1 block w-full input-sm" wire:model="country" required />
         </div>
         <!-- Pincode -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="pincode" value="{{ __('Pincode') }}" />
-            <x-input id="pincode" type="text" class="mt-1 block w-full" wire:model="pincode" required />
-            <x-input-error for="pincode" class="mt-2" />
+            <x-mary-input label="Pincode" id="pincode" type="number" class="mt-1 block w-full input-sm" wire:model="pincode" required />
         </div>
     </x-slot>
 
     <x-slot name="actions">
-        <x-button type="submit">
-            <span class="loading loading-bars loading-xs me-2" wire:loading></span> {{ __('Update') }}
-        </x-button>
+        <x-mary-button type="submit" class="btn-primary btn-sm ms-3" label="Update" />
     </x-slot>
 </x-form-section>

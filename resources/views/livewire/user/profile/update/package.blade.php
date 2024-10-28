@@ -11,7 +11,7 @@
         <x-slot name="form">
             <div class="col-span-6 sm:col-span-4">
                 <x-label class="sr-only" for="package" value="{{ __('Plans') }}" />
-                <select id="package" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" {{ $planRequest ? 'disabled' : '' }} wire:model="package" required>
+                <select id="package" class="mt-1 block w-full select select-primary select-sm" {{ $planRequest ? 'disabled' : '' }} wire:model="package" required>
                     <option value="Standard">Standard</option>
                     <option value="Classic">Classic</option>
                     <option value="Expert">Expert</option>
@@ -27,9 +27,7 @@
         </x-slot>
 
         <x-slot name="actions">
-            <x-button type="submit">
-                <span class="loading loading-bars loading-xs me-2" {{ $planRequest ? 'disabled' : '' }} wire:loading></span> {{ __('Change') }}
-            </x-button>
+            <x-mary-button type="submit" class="btn-primary btn-sm ms-3" label="Change" />
         </x-slot>
     </x-form-section>
 

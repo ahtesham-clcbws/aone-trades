@@ -38,14 +38,10 @@
                 </span>
             </div>
 
-            <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                {{ __('Select A New Photo') }}
-            </x-secondary-button>
+            <x-mary-button class="mt-2 me-2 btn-primary btn-sm" icon="o-photo" label="{{ $this->user->profile_photo_path ? 'Select A New Photo' : 'Select A Photo' }}" type="button" x-on:click.prevent="$refs.photo.click()" />
 
             @if ($this->user->profile_photo_path)
-            <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                {{ __('Remove Photo') }}
-            </x-secondary-button>
+            <x-mary-button type="button" class="mt-2 btn-error btn-sm" icon="o-x-mark" label="Remove Photo" wire:click="deleteProfilePhoto" />
             @endif
 
             <x-input-error for="photo" class="mt-2" />
@@ -54,22 +50,16 @@
 
         <!-- FirstName -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="firstname" value="{{ __('First name') }}" />
-            <x-input id="firstname" type="text" class="mt-1 block w-full" wire:model="state.firstname" required autocomplete="given-name" />
-            <x-input-error for="firstname" class="mt-2" />
+            <x-mary-input label="First Name" id="firstname" type="text" class="mt-1 block w-full input-sm" wire:model="state.firstname" required autocomplete="given-name" />
         </div>
         <!-- LastName -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="lastname" value="{{ __('Last name') }}" />
-            <x-input id="lastname" type="text" class="mt-1 block w-full" wire:model="state.lastname" required autocomplete="family-name" />
-            <x-input-error for="lastname" class="mt-2" />
+            <x-mary-input label="Last Name" id="lastname" type="text" class="mt-1 block w-full input-sm" wire:model="state.lastname" required autocomplete="family-name" />
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="email" value="{{ __('Email') }}" />
-            <x-input id="email" type="email" class="mt-1 block w-full" wire:model="state.email" required autocomplete="username" />
-            <x-input-error for="email" class="mt-2" />
+            <x-mary-input label="Email" id="email" type="email" class="mt-1 block w-full input-sm" wire:model="state.email" required autocomplete="username" />
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
             <p class="text-sm mt-2">
@@ -90,15 +80,13 @@
 
         <!-- PhoneNumber -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="phone_number" value="{{ __('Phone number') }}" />
-            <x-input id="phone_number" type="tel" class="mt-1 block w-full" wire:model="state.phone_number" required autocomplete="tel" />
-            <x-input-error for="phone_number" class="mt-2" />
+            <x-mary-input label="Phone Number" id="phone_number" type="tel" class="mt-1 block w-full input-sm" wire:model="state.phone_number" required autocomplete="tel" />
         </div>
 
         <!-- Gender -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="gender" value="{{ __('Gender') }}" />
-            <select id="gender" wire:model="state.gender" autocomplete="sex" class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
+            <label for="gender" class="pt-0 label label-text font-semibold flex justify-start">Gender&nbsp;<span class="text-error">*</span> </label>
+            <select id="gender" wire:model="state.gender" autocomplete="sex" class="mt-1 block w-full select select-primary select-sm" required>
                 <option value="">Select Gender ...</option>
 
                 <option value="Male">Male</option>
@@ -110,9 +98,7 @@
 
         <!-- LastName -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="date_of_birth" value="{{ __('Date of Birth') }}" />
-            <x-input id="date_of_birth" type="date" class="mt-1 block w-full" wire:model="state.date_of_birth" required autocomplete="dob" />
-            <x-input-error for="date_of_birth" class="mt-2" />
+            <x-mary-input label="Bate of Birth" id="date_of_birth" type="date" class="mt-1 block w-full input-sm" wire:model="state.date_of_birth" required autocomplete="dob" />
         </div>
     </x-slot>
 
@@ -121,11 +107,6 @@
             {{ __('Saved.') }}
         </x-action-message>
 
-        <!-- <x-button wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Save') }}
-        </x-button> -->
-        <x-button type="submit">
-            {{ __('Save') }}
-        </x-button>
+        <x-mary-button type="submit" label="SAVE" class="btn-primary btn-sm" />
     </x-slot>
 </x-form-section>
