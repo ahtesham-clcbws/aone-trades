@@ -33,9 +33,6 @@ class Kyc extends Component
     public bool $showKycForm = false;
 
 
-    use Toast;
-    use WithFileUploads;
-
     public ?UserKyc $kyc;
 
     #[Validate('required|min:5')]
