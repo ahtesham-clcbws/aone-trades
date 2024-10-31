@@ -69,6 +69,7 @@ class CheckUserLocation
 
             $pageView->save();
 
+
             return $response;
         } catch (\Throwable $e) {
             report($e);

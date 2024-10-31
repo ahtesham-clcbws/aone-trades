@@ -27,15 +27,14 @@ class Table extends Component
         $headers = [
             ['key' => 'id', 'label' => '#'],
             ['key' => 'name', 'label' => 'Name'],
-            ['key' => 'email', 'label' => 'Email'],
             ['key' => 'package', 'label' => 'Plan'],
+            ['key' => 'IsIBPartner', 'label' => 'IB Partner'],
             ['key' => 'created_at', 'label' => 'Registration'],
-            ['key' => 'password_view', 'label' => 'PWD'],
             ['key' => 'status', 'label' => 'KYC Status'],
             ['key' => 'actions', 'label' => 'Actions'],
         ];
 
-        $users = User::orderBy('id', 'desc')->where('role', 'user')->paginate(10);
+        $users = User::with('ib_partnet_request')->orderBy('id', 'desc')->where('role', 'user')->paginate(10);
 
         return view('livewire.admin.user.table', [
             'headers' => $headers,

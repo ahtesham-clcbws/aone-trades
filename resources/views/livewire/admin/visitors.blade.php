@@ -10,7 +10,7 @@
             per-page="perPage"
             :per-page-values="[10, 20, 50]"
             wire:model="expanded"
-            expandable>
+            expandable show-empty-text>
             <x-slot:empty>
                 <x-mary-icon name="o-cube" label="It is empty." />
             </x-slot:empty>

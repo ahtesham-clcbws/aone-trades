@@ -6,15 +6,43 @@
     </div>
 
     <x-mary-card>
-        <x-mary-table :headers="$headers" :rows="$withdrawls" with-pagination>
-            @scope('cell_amount', $deposit)
-            $ {{ $deposit->amount }}
+        <x-mary-table :headers="$headers" :rows="$withdrawls" with-pagination show-empty-text wire:model="expanded" expandable>
+            @scope('cell_amount', $entity)
+            $ {{ $entity->amount }}
             @endscope
-            @scope('cell_status', $deposit)
-            <x-mary-badge :value="$deposit->status" class="badge-{{ $deposit->status == 'rejected' ? 'error' : ($deposit->status == 'approved' ? 'success' : 'warning') }}" />
-            @if ($deposit->status == 'rejected' && $deposit->reject_notes)
-            <span class="text-red-500">{{ $deposit->reject_notes }}</span>
+            @scope('cell_status', $entity)
+            <x-mary-badge :value="$entity->status" class="badge-{{ $entity->status == 'rejected' ? 'error' : ($entity->status == 'approved' ? 'success' : 'warning') }}" />
+            @if ($entity->status == 'rejected' && $entity->reject_notes)
+            <span class="text-red-500">{{ $entity->reject_notes }}</span>
             @endif
+            @endscope
+            @scope('expansion', $entity)
+            <div class="bg-base-200 p-8">
+                @if (strtolower($entity->type) == 'bank')
+                <table class="customTable w-full">
+                    <tr>
+                        <td><b>Bank Name:</b></td>
+                        <td>{{ $entity->bank_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Account Number:</b></td>
+                        <td>{{ $entity->address }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Bank Branch:</b></td>
+                        <td>{{ $entity->bank_branch }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>IFSC Code:</b></td>
+                        <td>{{ $entity->ifsc_code }}</td>
+                    </tr>
+                </table>
+                @elseif(strtolower($entity->type) == 'usdt')
+                <p><b>USDT address: </b>{{ $entity->address }}</p>
+                @else
+                <p><b>UPI address: </b>{{ $entity->address }}</p>
+                @endif
+            </div>
             @endscope
         </x-mary-table>
     </x-mary-card>

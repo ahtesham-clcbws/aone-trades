@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('user_plan_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->index();
-            $table->enum('package', ['Standard', 'Classic', 'Expert', 'Master', 'Pro']);
+            $table->enum('package', getPlansArray());
             $table->enum('status', ['approved', 'rejected', 'pending'])->default('pending');
             $table->timestamps();
         });

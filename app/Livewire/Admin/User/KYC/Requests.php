@@ -52,4 +52,54 @@ class Requests extends Component
             $this->error($th->getMessage());
         }
     }
+    public function approve($id)
+    {
+        try {
+            $deposit = UserKyc::find($id);
+            $deposit->status = 'approved';
+            $deposit->save();
+            $this->success('Approved successfully.');
+        } catch (\Throwable $th) {
+            report($th->getMessage());
+            $this->error($th->getMessage());
+        }
+    }
+    public function delete($id)
+    {
+        try {
+            UserKyc::destroy($id);
+            $this->success('Deleted successfully.');
+        } catch (\Throwable $th) {
+            report($th->getMessage());
+            $this->error($th->getMessage());
+        }
+    }
+    public function openRejectPanel($id)
+    {
+        $this->rejectId = $id;
+        $this->rejectMessage = null;
+        $this->showRejectPanel = true;
+    }
+    public function closeRejectPanel()
+    {
+        $this->rejectId = null;
+        $this->rejectMessage = null;
+        $this->showRejectPanel = false;
+    }
+
+    public function reject()
+    {
+        try {
+            $deposit = UserKyc::find($this->rejectId);
+            $deposit->status = 'rejected';
+            $deposit->reject_notes = $this->rejectMessage ? $this->rejectMessage : null;
+            $deposit->save();
+            $this->success('Rejected successfully.');
+            $this->closeRejectPanel();
+        } catch (\Throwable $th) {
+            report($th->getMessage());
+            $this->error($th->getMessage());
+            $this->closeRejectPanel();
+        }
+    }
 }

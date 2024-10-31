@@ -59,7 +59,7 @@
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
-            <x-mary-input label="Email" id="email" type="email" class="mt-1 block w-full input-sm" wire:model="state.email" required autocomplete="username" />
+            <x-mary-input label="Email" id="email" type="email" class="mt-1 block w-full input-sm" wire:model="state.email" readonly />
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
             <p class="text-sm mt-2">
@@ -81,7 +81,7 @@
         @if (auth()->user()->role == 'user')
         <!-- PhoneNumber -->
         <div class="col-span-6 sm:col-span-4">
-            <x-mary-input label="Phone Number" id="phone_number" type="tel" class="mt-1 block w-full input-sm" wire:model="state.phone_number" required autocomplete="tel" />
+            <x-mary-input label="Phone Number" id="phone_number" type="number" min="6123547896" max="9999999990" minlength="10" maxlength="10" class="mt-1 block w-full input-sm" wire:model="state.phone_number" required autocomplete="tel" />
         </div>
 
         <!-- Gender -->

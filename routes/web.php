@@ -38,6 +38,9 @@ use App\Livewire\Admin\User\KYC\Details as UserKycDetails;
 use App\Livewire\Admin\Visitors as PageViews;
 use App\Livewire\Admin\Settings\Help as AdminHelpSection;
 use App\Livewire\Admin\Settings\Downloads as AdminDownloadsSection;
+use App\Livewire\Admin\User\IBPartnerRequest;
+use App\Livewire\User\Account\Address;
+use App\Livewire\User\Account\BankInfo;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
@@ -86,7 +89,8 @@ Route::middleware([
                 Route::get('withdraw', HistoryWithdraw::class)->name('withdraw');
             });
             Route::group(['prefix' => 'account', 'as' => 'account.'], function () {
-                Route::get('profile', Profile::class)->name('profile');
+                Route::get('address', Address::class)->name('address');
+                Route::get('bank-info', BankInfo::class)->name('bank');
                 Route::get('kyc', Kyc::class)->name('kyc');
             });
 
@@ -104,7 +108,6 @@ Route::middleware([
 
             Route::group(['prefix' => 'deposit', 'as' => 'deposit.'], function () {
                 Route::get('requests', DepositRequests::class)->name('requests');
-                Route::get('detail/{id}', DepositDetails::class)->name('detail');
 
                 Route::get('/', function () {
                     return redirect('/admin/deposit/requests');
@@ -113,7 +116,6 @@ Route::middleware([
 
             Route::group(['prefix' => 'withdrawal', 'as' => 'withdrawal.'], function () {
                 Route::get('requests', WithdrawalRequests::class)->name('requests');
-                Route::get('detail/{id}', WithdrawalDetails::class)->name('detail');
 
                 Route::get('/', function () {
                     return redirect('/admin/withdrawal/requests');
@@ -126,12 +128,12 @@ Route::middleware([
                 Route::get('plan-change', UserPlanChangeRequest::class)->name('plans');
                 Route::group(['prefix' => 'kyc', 'as' => 'kyc.'], function () {
                     Route::get('requests', UserKycRequests::class)->name('requests');
-                    Route::get('detail/{id}', UserKycDetails::class)->name('detail');
 
                     Route::get('/', function () {
                         return redirect('/admin/user/kyc/requests');
                     });
                 });
+                Route::get('ib-partner-requests', IBPartnerRequest::class)->name('ibpartner');
 
                 Route::get('/', function () {
                     return redirect('/admin/user/all');

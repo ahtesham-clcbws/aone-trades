@@ -4,6 +4,7 @@ namespace App\Livewire\User\Profile\Update;
 
 use App\Models\User;
 use App\Models\UserPlanRequest;
+use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Mary\Traits\Toast;
@@ -13,23 +14,31 @@ class Package extends Component
     use Toast;
     public User $user;
 
-    public $package;
-
-    public $packages = [
-        "Standard",
-        "Classic",
-        "Expert",
-        "Master",
-        "Pro"
-    ];
+    public $package = null;
 
     public $planRequest = null;
 
-    public function mount()
+    public $ourPackages = [];
+
+    public function mount(#[CurrentUser] User $user)
     {
-        $this->user = Auth::user();
-        $this->package = $this->user->package;
-        $planRequests = $this->user->pendingPlanRequests;
+        $packages = [];
+        $this->user = $user;
+
+        foreach (getPlans() as $package) {
+            $newPackage = [
+                'id' => $package->name,
+                'name' => $package->name
+            ];
+            if ($package == $user->package) {
+                $newPackage['disabled'] = true;
+            }
+            $packages[] = $newPackage;
+        }
+        $this->ourPackages = $packages;
+
+        $this->package = $user->package;
+        $planRequests = $user->pendingPlanRequests;
         if ($planRequests && count($planRequests)) {
             $this->planRequest = $planRequests[0];
         }
@@ -40,16 +49,18 @@ class Package extends Component
         return view('livewire.user.profile.update.package');
     }
 
-    public function save()
+    public function save(#[CurrentUser] User $user)
     {
         try {
-            if ($this->planRequest) {
-                if ($this->package !== $this->user->package) {
+            if (!$this->planRequest) {
+                if ($this->package !== $user->package) {
                     $planRequest = new UserPlanRequest();
-                    $planRequest->user_id = $this->user->id;
+                    $planRequest->user_id = $user->id;
+                    $planRequest->current_package = $user->package;
                     $planRequest->package = $this->package;
                     $planRequest->save();
-                    return $this->success('Account upgrade request recieved successfully, please wait for sometime our executive will get in touch with you.');
+                    $this->success('Account upgrade request recieved successfully, please wait for sometime our executive will get in touch with you.');
+                    return $this->js('window.location.reload()');
                 }
                 return $this->error('Change plan first, to submit the request.');
             }

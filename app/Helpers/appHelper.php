@@ -9,23 +9,31 @@ function getPlans()
         ],
         (object)[
             'id' => 'advance_account_intermediate',
-            'name' => 'Advance Account (intermediate) '
+            'name' => 'Advance Account (intermediate)'
         ],
         (object)[
             'id' => 'advance_account_expert',
-            'name' => 'Advance Account (Expert) '
+            'name' => 'Advance Account (Expert)'
         ],
         (object)[
             'id' => 'expert_account_master',
-            'name' => 'Expert Account (Master) '
+            'name' => 'Expert Account (Master)'
         ],
         (object)[
             'id' => 'vip_account_vip',
-            'name' => 'VIP Account (VIP) '
+            'name' => 'VIP Account (VIP)'
         ],
         (object)[
             'id' => 'exclusive_account_vvip',
             'name' => 'Exclusive Account (VVIP)'
         ]
     ];
+}
+
+function getPlansArray(){
+    $array = [];
+    foreach (getPlans() as $plan) {
+        $array[] = $plan->name;
+    }
+    return $array;
 }

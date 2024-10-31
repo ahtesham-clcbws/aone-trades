@@ -9,11 +9,7 @@
         <x-mary-table :headers="$headers" :rows="$withdrawls" with-pagination
             per-page="perPage"
             :per-page-values="[10, 20, 50]"
-            wire:model="expanded" expandable>
-            @scope('cell_id', $withdrawal)
-            {{ $loop->index + 1 }}
-            @endscope
-
+            wire:model="expanded" expandable show-empty-text>
             @scope('cell_user.name', $withdrawal)
             {{ $withdrawal->user->name }}<br />
             {{ $withdrawal->user->email }}
@@ -42,34 +38,36 @@
 
             @scope('expansion', $withdrawal)
             <div class="bg-base-200 p-3">
-                @if ($withdrawal->transfer)
-                @if (strtolower($withdrawal->transfer->type) == 'bank')
-                <table class="customTable w-full">
-                    <tr>
-                        <td><b>Bank Name:</b></td>
-                        <td>{{ $withdrawal->transfer->bank_name }}</td>
-                    </tr>
-                    <tr>
-                        <td><b>Account Number:</b></td>
-                        <td>{{ $withdrawal->transfer->address }}</td>
-                    </tr>
-                    <tr>
-                        <td><b>Bank Branch:</b></td>
-                        <td>{{ $withdrawal->transfer->bank_branch }}</td>
-                    </tr>
-                    <tr>
-                        <td><b>IFSC Code:</b></td>
-                        <td>{{ $withdrawal->transfer->ifsc_code }}</td>
-                    </tr>
-                </table><br />
-                @else
-                <p><b>{{ $withdrawal->transfer->type }}: </b><span>{{ $withdrawal->transfer->address }}</span></p><br />
-                @endif
-                @endif
+
                 @if ($withdrawal->status == 'rejected' && $withdrawal->reject_notes)
                 <p class="text-error mb-3"><b>Reject Notes: </b> {{ $withdrawal->reject_notes }}</p><br />
                 @endif
-                <p><b>User Comments: </b> {{ $withdrawal->user_comments ? $withdrawal->user_comments : 'N/A' }}</p>
+
+                @if (strtolower($withdrawal->type) == 'bank')
+                <table class="customTable w-full">
+                    <tr>
+                        <td><b>Bank Name:</b></td>
+                        <td>{{ $withdrawal->bank_name }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Account Number:</b></td>
+                        <td>{{ $withdrawal->address }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Bank Branch:</b></td>
+                        <td>{{ $withdrawal->bank_branch }}</td>
+                    </tr>
+                    <tr>
+                        <td><b>IFSC Code:</b></td>
+                        <td>{{ $withdrawal->ifsc_code }}</td>
+                    </tr>
+                </table>
+                @elseif(strtolower($withdrawal->type) == 'usdt')
+                <p><b>USDT address: </b>{{ $withdrawal->address }}</p>
+                @else
+                <p><b>UPI address: </b>{{ $withdrawal->address }}</p>
+                @endif
+
             </div>
             @endscope
 

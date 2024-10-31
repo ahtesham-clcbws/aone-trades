@@ -17,7 +17,7 @@ class PlanChangeRequest extends Component
     use WithPagination;
     public $perPage = 10;
 
-    public $showRejectPanel = false;
+    public bool $showRejectPanel = false;
 
     public $rejectMessage = null;
     public $rejectId = null;
@@ -27,7 +27,7 @@ class PlanChangeRequest extends Component
         $headers = [
             ['key' => 'id', 'label' => '#'],
             ['key' => 'user.name', 'label' => 'Name'],
-            ['key' => 'user.package', 'label' => 'Current Plan'],
+            ['key' => 'current_package', 'label' => 'Current Plan'],
             ['key' => 'package', 'label' => 'Requested Plan'],
             ['key' => 'status', 'label' => 'Status'],
             ['key' => 'created_at', 'label' => 'Requested'],

@@ -3279,7 +3279,7 @@ select.uk-form-width-xsmall {
 .uk-label {
   display: inline-block;
   padding: 5px 12px;
-  background: #1980ec;
+  background: #F3782C;
   line-height: 1.588;
   font-size: 0.813rem;
   color: #fff;
@@ -4737,7 +4737,7 @@ select.uk-form-width-xsmall {
  * Primary
  */
 .uk-notification-message-primary {
-  color: #1980ec;
+  color: #F3782C;
 }
 
 /*
@@ -26454,7 +26454,7 @@ footer .social-media-list div a .fab {
   border-color: #c89b42;
 }
 .in-wave-4 .in-wave-pricing .in-list-check > li::before {
-  color: #1980ec;
+  color: #F3782C;
 }
 
 @media (max-width: 960px) {

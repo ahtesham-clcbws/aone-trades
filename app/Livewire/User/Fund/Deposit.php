@@ -19,6 +19,16 @@ class Deposit extends Component
     use Toast;
     use WithFileUploads;
 
+    public $showSection = null;
+    public function setShowSection($section)
+    {
+        if ($this->showSection == $section) {
+            $this->showSection = null;
+        } else {
+            $this->showSection = $section;
+        }
+    }
+
     #[Validate('image')]
     public $file;
 

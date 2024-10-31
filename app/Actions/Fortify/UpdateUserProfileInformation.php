@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -22,7 +23,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'lastname' => ['required', 'string', 'max:255'],
             'phone_number' => ['required', 'string', 'max:13'],
             'gender' => ['required', 'string'],
-            'date_of_birth' => ['required'],
+            'date_of_birth' => ['required', 'before:' . Carbon::now()->subYears(18)->format('Y-m-d')],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'photo' => ['required', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');

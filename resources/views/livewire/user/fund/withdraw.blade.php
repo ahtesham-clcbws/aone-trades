@@ -12,18 +12,19 @@
             </div>
         </div>
         <x-mary-form wire:submit="save" class="mt-5" no-separator>
-            <div class="grid md:grid-cols-2 gap-3">
-                <x-mary-input placeholder="Enter amount in dollars" type="number" wire:model="amount" prefix="$" required />
-                <x-mary-password placeholder="Password" wire:model="password" clearable required />
-            </div>
-            <x-mary-textarea wire:model="comments" placeholder="Comments" rows="3" inline class="leading-snug"/>
-            <div>
-                @if (count($transferTypeAlreadyAdded))
-                <x-mary-radio label="Select mode" :options="$typeOptions" wire:model.live="type" required />
-                @else
-                Not transfer details found, please add Bank account, UPI or USDT to profile to proceed with withdrawals.<br />
-                <x-mary-button class="btn-secondary btn-sm" link="{{ route('user.account.profile') }}" label="Go to Profile" icon="o-user" />
-                @endif
+            <div class="grid gap-3">
+                <x-mary-input label="Amount" placeholder="Enter amount in dollars" type="number" wire:model="amount" prefix="$" required />
+                <div class="grid gap-3">
+                    <x-mary-radio label="Withdrawal Method" :options="$typeOptions" wire:model.live="type" required />
+                    @if ($type)
+                    <x-mary-input label="{{ $type == 'Bank' ? 'Account Number' : ($type == 'UPI' ? 'UPI Address' : 'USDT Address') }}" wire:model="address" required />
+                    @if ($type == 'Bank')
+                    <x-mary-input label="Bank Name" wire:model="bank_name" required />
+                    <x-mary-input label="Bank Branch" wire:model="bank_branch" required />
+                    <x-mary-input label="IFSC Code" wire:model="ifsc_code" required />
+                    @endif
+                    @endif
+                </div>
             </div>
             <div class="">
                 <x-mary-button label="Submit Request" class="btn-primary mt-3" type="submit" spinner="save" />

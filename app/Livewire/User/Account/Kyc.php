@@ -21,7 +21,7 @@ class Kyc extends Component
     use WithFileUploads;
 
     public $kycSubmitted = false;
-    public $userKyc = null;
+    public ?UserKyc $userKyc = null;
     public $kycStatus = 'pending';
 
     public string $group = 'group1';
@@ -32,35 +32,12 @@ class Kyc extends Component
 
     public bool $showKycForm = false;
 
-
-    public ?UserKyc $kyc;
-
-    #[Validate('required|min:5')]
-    public $name;
-
-    #[Validate('required|regex:/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/')]
-    public $pancard;
-
-    #[Validate('nullable|image')]
+    #[Validate('required|image')]
     public $pancard_proof;
-
-    #[Validate('required|min:5')]
-    public $bank_name;
-
-    #[Validate('required|confirmed|digits_between:11,16')]
-    public $account_number;
-
-    #[Validate('required|digits_between:11,16')]
-    public $account_number_confirmation;
-
-    #[Validate('required|regex:/^[A-Z]{4}0[A-Z0-9]{6}$/')]
-    public $ifsc_code;
-
-    #[Validate('nullable|image')]
-    public $bank_proof;
-
-    #[Validate('nullable|image')]
+    #[Validate('required|image')]
     public $address_proof;
+    #[Validate('required|image')]
+    public $address_proof_back;
 
 
     public function mount(#[CurrentUser] User $user)
@@ -69,7 +46,6 @@ class Kyc extends Component
         if ($userKyc) {
             $this->kycSubmitted = true;
             $this->userKyc = $userKyc;
-            $this->setData($userKyc);
         }
         $this->kycStatus = $user->getKycStatus();
 
@@ -102,57 +78,27 @@ class Kyc extends Component
         }
     }
 
-    public function setData(UserKyc $kyc)
-    {
-        $this->name = $kyc->name;
-
-        $this->pancard = $kyc->pancard;
-
-        $this->bank_name = $kyc->bank_name;
-
-        $this->account_number = $kyc->account_number;
-        $this->account_number_confirmation = $kyc->account_number;
-
-        $this->ifsc_code = $kyc->ifsc_code;
-    }
-
     public function store(#[CurrentUser] User $user)
     {
         try {
             $this->validate();
 
-            $pancard_proof_path = null;
-            $bank_proof_path = null;
-            $address_proof_path = null;
-            if ($this->pancard_proof) {
-                $pancard_proof_path = $this->pancard_proof->store('kyc/' . $user->id, 'public');
-            }
-            if ($this->bank_proof) {
-                $bank_proof_path = $this->bank_proof->store('kyc/' . $user->id, 'public');
-            }
-            if ($this->address_proof) {
-                $address_proof_path = $this->address_proof->store('kyc/' . $user->id, 'public');
-            }
+            $pancard_file = $this->pancard_proof->store('kyc/' . $user->id, 'public');
+            $address_proof_file = $this->address_proof->store('kyc/' . $user->id, 'public');
+            $address_proof_file_back = $this->address_proof_back->store('kyc/' . $user->id, 'public');
 
             $userKyc = new UserKyc();
 
             $userKyc->user_id = $user->id;
 
-            $userKyc->name = $this->name;
-            $userKyc->pancard = $this->pancard;
-            $userKyc->bank_name = $this->bank_name;
-            $userKyc->account_number = $this->account_number;
-            $userKyc->ifsc_code = $this->ifsc_code;
-
-            $userKyc->pancard_file = $pancard_proof_path;
-            $userKyc->bank_proof_file = $bank_proof_path;
-            $userKyc->address_proof_file = $address_proof_path;
+            $userKyc->pancard_file = $pancard_file;
+            $userKyc->address_proof_file = $address_proof_file;
+            $userKyc->address_proof_file_back = $address_proof_file_back;
 
             $userKyc->save();
 
             $this->success('KYC submitted successfully');
-            $this->redirect('/user/account/kyc');
-            // user/account/kyc
+            $this->js('window.location.reload()');
         } catch (\Throwable $th) {
             $this->error($th->getMessage());
         }
@@ -160,34 +106,22 @@ class Kyc extends Component
     public function update(#[CurrentUser] User $user)
     {
         try {
-            // $this->validate();
+            $this->validate();
 
+            $userKyc = UserKyc::find($this->userKyc->id);
 
-            $userKyc = UserKyc::find($this->kyc->id);
+            $pancard_file = $this->pancard_proof->store('kyc/' . $user->id, 'public');
+            $address_proof_file = $this->address_proof->store('kyc/' . $user->id, 'public');
+            $address_proof_file_back = $this->address_proof_back->store('kyc/' . $user->id, 'public');
 
-            $userKyc->name = $this->name;
-            $userKyc->pancard = $this->pancard;
-            $userKyc->bank_name = $this->bank_name;
-            $userKyc->account_number = $this->account_number;
-            $userKyc->ifsc_code = $this->ifsc_code;
-
-            if ($this->pancard_proof) {
-                $pancard_proof_path = $this->pancard_proof->store('kyc/' . $user->id, 'public');
-                $userKyc->pancard_file = $pancard_proof_path;
-            }
-            if ($this->bank_proof) {
-                $bank_proof_path = $this->bank_proof->store('kyc/' . $user->id, 'public');
-                $userKyc->bank_proof_file = $bank_proof_path;
-            }
-            if ($this->address_proof) {
-                $address_proof_path = $this->address_proof->store('kyc/' . $user->id, 'public');
-                $userKyc->address_proof_file = $address_proof_path;
-            }
+            $userKyc->pancard_file = $pancard_file;
+            $userKyc->address_proof_file = $address_proof_file;
+            $userKyc->address_proof_file_back = $address_proof_file_back;
 
             $userKyc->save();
 
             $this->success('KYC re-submitted successfully');
-            // refresh the page after submit
+            $this->js('window.location.reload()');
             $this->reset();
         } catch (\Throwable $th) {
             $this->error($th->getMessage());

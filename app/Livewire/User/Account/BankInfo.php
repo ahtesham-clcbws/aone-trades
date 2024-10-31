@@ -5,20 +5,21 @@ namespace App\Livewire\User\Account;
 use App\Models\User;
 use App\Models\UserTransferDetail;
 use Illuminate\Container\Attributes\CurrentUser;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
-
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
 use Mary\Traits\Toast;
+use Livewire\Attributes\Rule;
 
 #[Layout('layouts.app')]
-class Profile extends Component
+class BankInfo extends Component
 {
     use Toast;
 
     public $editDetails = null;
     public $openAddDetailsForm = false;
     public $planRequest = null;
+
     public $transferDetails = [];
     public $transferTypeAlreadyAdded = []; // Bank, UPI, USDT
     public $typeOptions = [
@@ -35,30 +36,81 @@ class Profile extends Component
             'name' => 'USDT'
         ]
     ];
-    public $activeOptions = [
-        [
-            'id' => false,
-            'name' => 'InActive'
-        ],
-        [
-            'id' => true,
-            'name' => 'Active'
-        ]
-    ];
 
-    public $type = null;
+
+    #[Validate(['required', 'string'])]
+    public $type;
+
+    #[Rule]
     public $address = null;
-    public $bank_name = null;
-    public $bank_branch = null;
-    public $ifsc_code = null;
-    public $isActive = true;
 
-    public function mount()
+    #[Validate(['required_if:type,Bank'])]
+    public $bank_name = null;
+    #[Validate(['required_if:type,Bank'])]
+    public $bank_branch = null;
+    #[Rule]
+    public $ifsc_code = null;
+
+    public function rules()
     {
-        $this->getInitialData();
+        return [
+            'type' => ['required', 'string'],
+            'address' => $this->getAddressRule(),
+            'bank_name' => ['required_if:type,Bank'],
+            'bank_branch' => ['required_if:type,Bank'],
+            'ifsc_code' => $this->getIfscCodeRule(),
+        ];
     }
-    public function getInitialData(){
-        $user = Auth::user();
+
+    protected function getAddressRule()
+    {
+        return match ($this->type) {
+            'Bank' => ['required', 'numeric'], // Account number validation
+            'UPI' => ['required', 'regex:/^[a-z0-9]*@[a-z]*$/'], // UPI validation
+            'USDT' => ['required', 'regex:/^T[A-Za-z1-9]{33}$/'], // USDT validation
+            default => ['required'],
+        };
+    }
+
+    protected function getIfscCodeRule()
+    {
+        return $this->type === 'Bank'
+            ? ['required', 'regex:/^[A-Z]{4}0[A-Z0-9]{6}$/']
+            : [];
+    }
+
+    public function messages()
+    {
+        return [
+            'address.required' => 'The address field is required.',
+            'address.numeric' => 'The account number should contain only numbers.',
+            'address.regex' => $this->getAddressErrorMessage(),
+
+            'ifsc_code.required' => 'The IFSC code is required for bank transfers.',
+            'ifsc_code.regex' => 'The IFSC code format is invalid. It should match the format: ABCD0EFGHIJ.',
+        ];
+    }
+
+    protected function getAddressErrorMessage()
+    {
+        return match ($this->type) {
+            'UPI' => 'The UPI address format is invalid. Example: upinumber@bankname',
+            'USDT' => 'The USDT address format is invalid. It should start with "T" followed by 33 alphanumeric characters.',
+            default => 'The address format is invalid.',
+        };
+    }
+
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
+    public function mount(#[CurrentUser] User $user)
+    {
+        $this->getInitialData($user);
+    }
+    public function getInitialData($user)
+    {
         if ($user->pendingPlanRequests && count($user->pendingPlanRequests)) {
             $this->planRequest = $user->pendingPlanRequests[0];
         }
@@ -84,11 +136,6 @@ class Profile extends Component
             }
         }
     }
-    public function render()
-    {
-        return view('livewire.user.account.profile');
-    }
-
     public function resetForm()
     {
         $this->editDetails = null;
@@ -97,7 +144,6 @@ class Profile extends Component
         $this->bank_name = null;
         $this->bank_branch = null;
         $this->ifsc_code = null;
-        $this->isActive = true;
     }
 
     public function addDetails($id = null)
@@ -113,8 +159,9 @@ class Profile extends Component
 
     public function save(#[CurrentUser] User $user)
     {
+        $this->validate();
         if ($this->editDetails) {
-            return $this->update();
+            return $this->update($user);
         }
         return $this->store($user);
     }
@@ -128,18 +175,17 @@ class Profile extends Component
             $newDetails->bank_name = $this->bank_name;
             $newDetails->bank_branch = $this->bank_branch;
             $newDetails->ifsc_code = $this->ifsc_code;
-            $newDetails->isActive = true;
             $newDetails->save();
             $this->resetForm();
             $this->openAddDetailsForm = false;
             $this->success('Details successfully added.');
-            $this->getInitialData();
+            $this->getInitialData($user);
         } catch (\Throwable $th) {
             report($th->getMessage());
             $this->error($th->getMessage());
         }
     }
-    public function update()
+    public function update($user)
     {
         try {
             $this->editDetails->type = $this->type;
@@ -152,10 +198,14 @@ class Profile extends Component
             $this->resetForm();
             $this->openAddDetailsForm = false;
             $this->success('Details updated successfully.');
-            $this->getInitialData();
+            $this->getInitialData($user);
         } catch (\Throwable $th) {
             report($th->getMessage());
             $this->error($th->getMessage());
         }
+    }
+    public function render()
+    {
+        return view('livewire.user.account.bank-info');
     }
 }

@@ -9,10 +9,13 @@ class UserWithdrawl extends Model
     protected $fillable = [
         'user_id',
         'amount',
-        'user_comments',
         'status',
         'reject_notes',
         'type',
+        'address',
+        'bank_name',
+        'bank_branch',
+        'ifsc_code'
     ];
     public function user()
     {

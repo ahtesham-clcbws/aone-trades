@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('country')->nullable();
 
-            $table->enum('package', ['Standard', 'Classic', 'Expert', 'Master', 'Pro'])->default('Standard');
+            $table->enum('package', getPlansArray())->default(null);
 
             $table->string('password');
             $table->rememberToken();

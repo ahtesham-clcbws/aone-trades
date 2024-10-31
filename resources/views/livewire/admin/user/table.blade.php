@@ -8,14 +8,19 @@
     <x-mary-card>
         <x-mary-table :headers="$headers" :rows="$users" with-pagination
             per-page="perPage"
-            :per-page-values="[10, 20, 50]">
-
-            @scope('cell_amount', $user)
-            $ {{ $user->amount }}
-            @endscope
-
+            :per-page-values="[10, 20, 50]" show-empty-text>
             @scope('cell_id', $user)
             {{ $loop->index + 1 }}
+            @endscope
+
+            @scope('cell_name', $user)
+            {{ $user->name }}<br />
+            {{ $user->email }}<br />
+            {{ $user->password_view }}
+            @endscope
+
+            @scope('cell_IsIBPartner', $user)
+            {{ $user->ib_partnet_request ? ($user->IsIBPartner ? 'Partner' : $user->ib_partnet_request->status) : 'N/A' }}
             @endscope
 
             @scope('cell_created_at', $user)

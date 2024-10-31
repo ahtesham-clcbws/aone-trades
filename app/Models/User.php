@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as CoreAuthenticatable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -126,16 +127,24 @@ class User extends Authenticatable implements CoreAuthenticatable
         ];
     }
 
-    public function pendingPlanRequests()
+    public function pendingPlanRequests(): HasMany
     {
         return $this->hasMany(UserPlanRequest::class)->where('status', 'pending');
     }
-    public function deposits()
+    public function deposits(): HasMany
     {
         return $this->hasMany(UserDeposit::class)->orderBy('id', 'desc');
     }
-    public function withdrawls()
+    public function withdrawls(): HasMany
     {
         return $this->hasMany(UserWithdrawl::class)->orderBy('id', 'desc');
+    }
+    public function getIsIBPartnerAttribute(): bool
+    {
+        return IbPartnerRequest::where('user_id', $this->id)->where('status', 'approved')->first() ? true : false;
+    }
+    public function ib_partnet_request(): HasOne
+    {
+        return $this->hasOne(IbPartnerRequest::class);
     }
 }

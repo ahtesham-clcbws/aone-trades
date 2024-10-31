@@ -28,7 +28,7 @@
                 <li><small>Country</small></li>
                 <li><small>Zip/Pin code</small></li>
             </ol>
-            <small><b>Note: </b>You Can Complete Your Profile by <a class="text-primary" href="{{ route('user.account.profile') }}">Clicking Here</a>.</small>
+            <small><b>Note: </b>You Can Complete Your Profile by <a class="text-primary" href="{{ route('profile.show') }}">Clicking Here</a>.</small>
         </li>
         @endif
     </ol>

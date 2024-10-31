@@ -6,7 +6,7 @@
     </div>
 
     <x-mary-card>
-        <x-mary-table :headers="$headers" :rows="$deposits" with-pagination>
+        <x-mary-table :headers="$headers" :rows="$deposits" with-pagination show-empty-text>
             @scope('cell_deposit_receipt', $deposit)
             <x-mary-avatar :image="'/storage/'.$deposit->deposit_receipt" wire:click="openDepositImage('{{$deposit->deposit_receipt}}')" class="cursor-pointer" />
             @endscope

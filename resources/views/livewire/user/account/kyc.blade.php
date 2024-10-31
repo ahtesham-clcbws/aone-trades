@@ -39,29 +39,23 @@
                 @endif
                 <x-mary-card>
                     <x-mary-form wire:submit="save">
-                        <x-mary-input inline label="Name as per ID" wire:model="name" required="{{!$userKyc}}" />
-                        <x-mary-input inline label="Pancard Number" wire:model="pancard" required />
 
                         <div class="input input-primary grid md:grid-cols-2 items-center gap-3 p-0 overflow-hidden">
                             <label class="text-gray-400 ps-4 leading-none">Attach Pancard</label>
-                            <x-mary-file wire:model="pancard_proof" accept="image/*" class="*:w-full *:border-0 m-0 *:-m-0.5 *:!rounded-none" />
+                            <x-mary-file wire:model="pancard_proof" accept="image/*" class="*:w-full *:border-0 m-0 *:-m-0.5 *:!rounded-none" required />
                         </div>
 
-                        <x-mary-input inline label="Bank Name" wire:model="bank_name" required />
-                        <x-mary-input inline label="Account Number" wire:model="account_number" required />
-                        <x-mary-password inline label="Confirm Account Number" wire:model="account_number_confirmation" right autocomplete="new-password" required />
-                        <x-mary-input inline label="IFSC Code" wire:model="ifsc_code" required />
-
                         <div class="input input-primary grid md:grid-cols-2 items-center gap-3 p-0 overflow-hidden">
-                            <label class="text-gray-400 ps-4 leading-none">Attach Bank Passboook/<br />Cancelled Cheque</label>
-                            <x-mary-file wire:model="bank_proof" accept="image/*" class="*:w-full *:border-0 m-0 *:-m-0.5 *:!rounded-none" />
+                            <label class="text-gray-400 ps-4 leading-none">
+                                Attach Address Proof (Front)
+                            </label>
+                            <x-mary-file wire:model="address_proof" accept="image/*" class="*:w-full *:border-0 m-0 *:-m-0.5 *:!rounded-none" required />
                         </div>
                         <div class="input input-primary grid md:grid-cols-2 items-center gap-3 p-0 overflow-hidden">
                             <label class="text-gray-400 ps-4 leading-none">
-                                Attach Address Proof<br />
-                                Aadhar/Passport/Driving License
+                                Attach Address Proof (Back)
                             </label>
-                            <x-mary-file wire:model="address_proof" accept="image/*" class="*:w-full *:border-0 m-0 *:-m-0.5 *:!rounded-none" />
+                            <x-mary-file wire:model="address_proof_back" accept="image/*" class="*:w-full *:border-0 m-0 *:-m-0.5 *:!rounded-none" required />
                         </div>
                         <div>
                             <x-mary-button label="Submit KYC" class="btn-primary" type="submit" spinner="save" />
@@ -115,4 +109,5 @@
             </div>
         </div>
     </div>
+    <livewire:user.support-section />
 </div>

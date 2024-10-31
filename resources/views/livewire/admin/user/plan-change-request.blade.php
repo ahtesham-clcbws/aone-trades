@@ -6,7 +6,7 @@
     </div>
 
     <x-mary-card>
-        <x-mary-table :headers="$headers" :rows="$data" with-pagination>
+        <x-mary-table :headers="$headers" :rows="$data" with-pagination show-empty-text>
 
             @scope('cell_id', $request)
             {{ $loop->index + 1 }}

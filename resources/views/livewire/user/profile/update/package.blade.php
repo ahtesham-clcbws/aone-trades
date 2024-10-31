@@ -10,14 +10,15 @@
 
         <x-slot name="form">
             <div class="col-span-6 sm:col-span-4">
-                <x-label class="sr-only" for="package" value="{{ __('Plans') }}" />
-                <select id="package" class="mt-1 block w-full select select-primary select-sm" {{ $planRequest ? 'disabled' : '' }} wire:model="package" required>
-                    <option value="Standard">Standard</option>
-                    <option value="Classic">Classic</option>
-                    <option value="Expert">Expert</option>
-                    <option value="Master">Master</option>
-                    <option value="Pro">Pro</option>
-                </select>
+                <x-mary-select
+                    label="Plans"
+                    placeholder="Select Plan"
+                    placeholder-value="0"
+                    :options="$ourPackages"
+                    wire:model="package"
+                    required
+                    class="select-sm select-primary"
+                     />
                 @if ($planRequest)
                 <div class="mt-4 text-red-600">
                     Account upgrade request for <b>{{ $planRequest->package }}</b> plan already sent on <b>{{ date('d-M-Y h:i A', strtotime($planRequest->created_at)) }}</b> please wait for sometime our executive will get in touch with you.

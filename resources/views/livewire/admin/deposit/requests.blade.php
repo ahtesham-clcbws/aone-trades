@@ -9,7 +9,7 @@
         <x-mary-table :headers="$headers" :rows="$deposits" with-pagination
             per-page="perPage"
             :per-page-values="[10, 20, 50]"
-            wire:model="expanded" expandable>
+            wire:model="expanded" expandable show-empty-text>
             @scope('cell_amount', $deposit)
             ${{ $deposit->amount }}
             @endscope

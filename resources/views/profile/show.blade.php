@@ -14,9 +14,6 @@
             @endif
 
             @if (auth()->user()->role == 'user')
-            <livewire:user.profile.update.preferences />
-            <x-section-border />
-
             <livewire:user.profile.update.package />
             <x-section-border />
             @endif

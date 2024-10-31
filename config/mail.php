@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'log'),
+    'default' => env('MAIL_MAILER', 'failover'),
 
     /*
     |--------------------------------------------------------------------------
@@ -83,6 +83,7 @@ return [
             'transport' => 'failover',
             'mailers' => [
                 'smtp',
+                'resend',
                 'log',
             ],
         ],
@@ -109,8 +110,13 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'support@aonetrades.com'),
+        'name' => env('MAIL_FROM_NAME', 'Aone Trades'),
     ],
+    'reply_to' => ['address' => 'support@aonetrades.com', 'name' => env('MAIL_FROM_NAME', 'Aone Trades')],
 
+    // Sending Mail via a Specific Mailer
+    // Mail::mailer('postmark')
+    // ->to($request->user())
+    // ->send(new OrderShipped($order));
 ];

@@ -46,5 +46,6 @@
             </x-mary-card>
             @endif
         </div>
+        <livewire:user.support-section />
     </div>
 </div>

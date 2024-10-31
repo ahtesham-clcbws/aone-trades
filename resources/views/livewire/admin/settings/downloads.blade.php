@@ -7,9 +7,9 @@
 
     <x-mary-card>
         <div class="flex justify-end">
-            <x-mary-button label="Add FAQ" class="btn-primary btn-sm" icon="o-plus-circle" title="Add FAQ" wire:click="openAddForm()" />
+            <x-mary-button label="Add Download" class="btn-primary btn-sm" icon="o-plus-circle" title="Add Download" wire:click="openAddForm()" />
         </div>
-        <x-mary-table :headers="$headers" :rows="$data" with-pagination>
+        <x-mary-table :headers="$headers" :rows="$data" with-pagination show-empty-text>
 
             @scope('cell_id', $entity)
             {{ $loop->index + 1 }}

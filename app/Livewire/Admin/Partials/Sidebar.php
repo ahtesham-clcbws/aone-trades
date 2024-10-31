@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Partials;
 
+use App\Models\IbPartnerRequest;
 use App\Models\UserDeposit;
 use App\Models\UserKyc;
 use App\Models\UserPlanRequest;
@@ -14,12 +15,14 @@ class Sidebar extends Component
     public $pendingWithdrawals = false;
     public $pendingPlanChange = false;
     public $pendingKYC = false;
+    public $IBPartnerRequests = false;
     public function mount()
     {
         $this->pendingDeposits = UserDeposit::where('status', 'pending')->select('id')->count();
         $this->pendingWithdrawals = UserWithdrawl::where('status', 'pending')->select('id')->count();
         $this->pendingPlanChange = UserPlanRequest::where('status', 'pending')->select('id')->count();
         $this->pendingKYC = UserKyc::where('status', 'pending')->select('id')->count();
+        $this->IBPartnerRequests = IbPartnerRequest::where('status', 'pending')->select('id')->count();
     }
     public function render()
     {

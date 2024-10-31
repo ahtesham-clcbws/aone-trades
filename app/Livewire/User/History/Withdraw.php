@@ -14,13 +14,15 @@ use Livewire\WithPagination;
 class Withdraw extends Component
 {
     use WithPagination;
+    public array $expanded = [];
 
     public function render(#[CurrentUser] User $user)
     {
         $headers = [
+            ['key' => 'id', 'label' => '#', 'class' => 'hidden'],
             ['key' => 'amount', 'label' => 'Amount'],
-            ['key' => 'user_comments', 'label' => 'Comments'],
             ['key' => 'status', 'label' => 'Status'],
+            ['key' => 'type', 'label' => 'Transfer On'],
             ['key' => 'created_at', 'label' => 'Date'],
         ];
 

@@ -6,7 +6,7 @@
     </div>
 
     <x-mary-card>
-        <x-mary-table :headers="$headers" :rows="$data" with-pagination>
+        <x-mary-table :headers="$headers" :rows="$data" with-pagination show-empty-text>
 
             @scope('cell_id', $kyc)
             {{ $loop->index + 1 }}
@@ -26,8 +26,11 @@
             @scope('cell_actions', $kyc)
             <div class="flex gap-2">
                 <x-mary-button icon="o-eye" class="btn-circle btn-sm bg-blue-400 text-white" title="View" wire:click="viewRequest('{{$kyc->id}}')" />
-                <x-mary-button icon="o-check" class="btn-circle btn-sm btn-success" title="Approve" />
-                <x-mary-button icon="o-x-mark" class="btn-circle btn-sm btn-error" title="Reject" />
+                @if ($kyc->status == 'pending')
+                <x-mary-button icon="o-check" type="button" class="btn-circle btn-sm btn-success" title="Approve" spinner="approve({{$kyc->id}})" wire:click="approve({{$kyc->id}})" />
+                <x-mary-button icon="o-x-mark" type="button" class="btn-circle btn-sm btn-error" title="Reject" wire:click="openRejectPanel({{$kyc->id}})" />
+                @endif
+                <x-mary-button icon="o-trash" type="button" class="btn-circle btn-sm btn-secondary" title="Delete" spinner="delete({{$kyc->id}})" wire:click="delete({{$kyc->id}})" />
             </div>
             @endscope
 
@@ -37,49 +40,33 @@
         <div class="w-full">
             <table class="customTable w-full">
                 <tr>
-                    <td colspan="2"><b>Name on ID: </b></td>
-                    <td colspan="2">{{ $userKyc?->name }}</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><b>Pancard ID: </b></td>
-                    <td colspan="2">{{ $userKyc?->pancard }}</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><b>Bank Name: </b></td>
-                    <td colspan="2">{{ $userKyc?->bank_name }}</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><b>Account Number: </b></td>
-                    <td colspan="2">{{ $userKyc?->account_number }}</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><b>IFSC Code: </b></td>
-                    <td colspan="2">{{ $userKyc?->ifsc_code }}</td>
+                    <td><b>Name: </b></td>
+                    <td>{{ $userKyc?->user?->name }}</td>
                 </tr>
 
                 <tr>
-                    <td colspan="2"><b>Date of Birth: </b></td>
-                    <td colspan="2">{{ $userKyc?->user?->date_of_birth ? date('d M, Y', strtotime($userKyc?->user?->date_of_birth)) : 'N/A' }}</td>
+                    <td><b>Date of Birth: </b></td>
+                    <td>{{ $userKyc?->user?->date_of_birth ? date('d M, Y', strtotime($userKyc?->user?->date_of_birth)) : 'N/A' }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2"><b>Gender: </b></td>
-                    <td colspan="2">{{ $userKyc?->user?->gender??'N/A' }}</td>
+                    <td><b>Gender: </b></td>
+                    <td>{{ $userKyc?->user?->gender??'N/A' }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2"><b>Time Zone: </b></td>
-                    <td colspan="2">{{ $userKyc?->user?->timezone??'N/A' }}</td>
+                    <td><b>Time Zone: </b></td>
+                    <td>{{ $userKyc?->user?->timezone??'N/A' }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2"><b>Address: </b></td>
-                    <td colspan="2">{{ $userKyc?->user?->address??'N/A' }}</td>
+                    <td><b>Address: </b></td>
+                    <td>{{ $userKyc?->user?->address??'N/A' }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2"><b>Pincode: </b></td>
-                    <td colspan="2">{{ $userKyc?->user?->pincode??'N/A' }}</td>
+                    <td><b>Pincode: </b></td>
+                    <td>{{ $userKyc?->user?->pincode??'N/A' }}</td>
                 </tr>
                 <tr>
-                    <td colspan="2"><b>City/State/Country: </b></td>
-                    <td colspan="2">{{ $userKyc?->user?->city??'-' }} / {{ $userKyc?->user?->state??'-' }} / {{ $userKyc?->user?->country??'-' }} </td>
+                    <td><b>City/State/Country: </b></td>
+                    <td>{{ $userKyc?->user?->city??'-' }} / {{ $userKyc?->user?->state??'-' }} / {{ $userKyc?->user?->country??'-' }} </td>
                 </tr>
 
                 <tr>
@@ -89,14 +76,31 @@
                     @if ($userKyc?->pancard_file)
                     <td><img src="/storage/{{ $userKyc->pancard_file }}" /></td>
                     @endif
-                    @if ($userKyc?->bank_proof_file)
-                    <td><img src="/storage/{{ $userKyc->bank_proof_file }}" /></td>
-                    @endif
+                </tr>
+                <tr>
                     @if ($userKyc?->address_proof_file)
                     <td><img src="/storage/{{ $userKyc->address_proof_file }}" /></td>
+                    @endif
+                    @if ($userKyc?->address_proof_file_back)
+                    <td><img src="/storage/{{ $userKyc->address_proof_file_back }}" /></td>
                     @endif
                 </tr>
             </table>
         </div>
+    </x-mary-modal>
+    <x-mary-modal wire:model="showRejectPanel" class="backdrop-blur" persistent>
+        <x-mary-form wire:submit="reject" no-separator>
+            <x-mary-textarea
+                label="Reject Notes/Comments"
+                wire:model="rejectMessage"
+                rows="3"
+                inline
+                class="leading-snug" />
+
+            <x-slot:actions>
+                <x-mary-button label="Reject" class="btn-error" type="submit" spinner="reject" />
+                <x-mary-button label="Close" wire:click="closeRejectPanel()" />
+            </x-slot:actions>
+        </x-mary-form>
     </x-mary-modal>
 </div>

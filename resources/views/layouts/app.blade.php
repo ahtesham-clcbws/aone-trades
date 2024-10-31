@@ -84,7 +84,7 @@
                             {{ __('Manage Account') }}
                         </div>
 
-                        <x-dropdown-link href="{{ route('user.account.profile') }}">
+                        <x-dropdown-link href="{{ route('profile.show') }}">
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -116,49 +116,12 @@
 
         {{-- This is a sidebar that works also as a drawer on small screens --}}
         {{-- Notice the `main-drawer` reference here --}}
-        <x-slot:sidebar drawer="main-drawer" collapsible class="bg-slate-50">
-
-            {{-- User --}}
-            @if($user = auth()->user())
-            <x-mary-list-item :item="$user" value="name" avatar="profile_photo_url" no-separator no-hover class="pt-2">
-                <x-slot:sub-value>
-                    <x-mary-badge value="{{$user->getKycStatusBadgeData()['value']}}" class="{{$user->getKycStatusBadgeData()['class']}}" />
-                </x-slot:sub-value>
-                <x-slot:actions>
-                    <form method="POST" action="{{ route('logout') }}" x-data>
-                        @csrf
-                        <x-mary-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff" no-wire-navigate type="submit" />
-                    </form>
-                </x-slot:actions>
-            </x-mary-list-item>
-
-            <x-mary-menu-separator />
-            @endif
-
-            {{-- Activates the menu item when a route matches the `link` property --}}
-            <x-mary-menu activate-by-route>
-                <x-mary-menu-item title="Home" icon="o-home" link="{{ route('user.dashboard') }}" />
-
-                <x-mary-menu-sub title="Manage Funds" icon="o-circle-stack">
-                    <x-mary-menu-item title="Deposit" link="{{ route('user.fund.deposit') }}" />
-                    <x-mary-menu-item title="Withdraw" link="{{ route('user.fund.withdraw') }}" />
-                </x-mary-menu-sub>
-
-                <x-mary-menu-sub title="Transactions" icon="o-currency-dollar">
-                    <x-mary-menu-item title="Deposit" link="{{ route('user.history.deposit') }}" />
-                    <x-mary-menu-item title="Withdraw" link="{{ route('user.history.withdraw') }}" />
-                </x-mary-menu-sub>
-
-                <x-mary-menu-item title="Manage Account" icon="o-users" link="{{ route('user.account.profile') }}" />
-                <x-mary-menu-item title="Compliance" icon="o-check-badge" link="{{ route('user.account.kyc') }}" />
-                <x-mary-menu-item title="Downloads" icon="o-arrow-down-tray" link="{{ route('user.downloads') }}" />
-                <x-mary-menu-item title="Help" icon="o-question-mark-circle" link="{{ route('user.help') }}" />
-            </x-mary-menu>
-        </x-slot:sidebar>
+        <livewire:user.menu.sidemenu />
 
         {{-- The `$slot` goes here --}}
         <x-slot:content>
             {{ $slot }}
+            <livewire:user.menu.i-b-partner-modal />
         </x-slot:content>
     </x-mary-main>
 
@@ -169,7 +132,8 @@
 
     @stack('modals')
 
-    @livewireScripts
+    {{--@livewireScripts--}}
+    @livewireScriptConfig
 </body>
 
 </html>

@@ -25,7 +25,7 @@ class Requests extends Component
     public function render()
     {
         $headers = [
-            ['key' => 'id', 'label' => '#'],
+            ['key' => 'id', 'label' => '#', 'class' => 'hidden'],
             ['key' => 'user.name', 'label' => 'User'],
             ['key' => 'amount', 'label' => 'Amount'],
             ['key' => 'type', 'label' => 'Transfer Type'],

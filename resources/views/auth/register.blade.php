@@ -59,11 +59,9 @@
                     <option value="" disabled selected>
                         Select Account Package
                     </option>
-                    <option value="Standard">Standard</option>
-                    <option value="Classic">Classic</option>
-                    <option value="Expert">Expert</option>
-                    <option value="Master">Master</option>
-                    <option value="Pro">Pro</option>
+                    @foreach (getPlans() as $plan)
+                    <option value="{{ $plan->name }}">{{ $plan->name }}</option>
+                    @endforeach
                 </select>
             </div>
 
