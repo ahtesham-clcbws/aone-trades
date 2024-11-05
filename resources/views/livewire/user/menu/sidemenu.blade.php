@@ -38,6 +38,8 @@
 
             <x-mary-menu-item title="Request for IB Partner" icon="o-user-group" onclick="openConfirmModal.showModal()" />
 
+            <x-mary-menu-item title="Request for Trading Account" icon="o-chart-bar-square" onclick="openTradingAccountModal.showModal()" />
+
             <x-mary-menu-item title="Downloads" icon="o-arrow-down-tray" link="{{ route('user.downloads') }}" />
 
             <x-mary-menu-item title="Help" icon="o-lifebuoy" link="{{ route('user.help') }}" />

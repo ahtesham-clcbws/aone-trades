@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,14 +9,17 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NotificationEmail extends Mailable
+class AdminNotificationEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public $content, public User $user) {}
+    public function __construct(public $content)
+    {
+        //
+    }
 
     /**
      * Get the message envelope.
@@ -35,7 +37,7 @@ class NotificationEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.notification',
+            view: 'emails.admin-notification',
         );
     }
 

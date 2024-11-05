@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Observers\UserWithdrawlObserver;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+#[ObservedBy([UserWithdrawlObserver::class])]
 class UserWithdrawl extends Model
 {
     protected $fillable = [

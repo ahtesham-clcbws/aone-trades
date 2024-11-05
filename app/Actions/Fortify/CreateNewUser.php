@@ -2,11 +2,15 @@
 
 namespace App\Actions\Fortify;
 
+use App\Mail\AdminNotificationEmail;
+use App\Mail\Welcome;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use Illuminate\Support\Facades\Mail;
+
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -29,7 +33,7 @@ class CreateNewUser implements CreatesNewUsers
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
-        return User::create([
+        $user = User::create([
             'firstname' => $input['firstname'],
             'lastname' => $input['lastname'],
             'phone_number' => $input['phone_number'],
@@ -38,5 +42,11 @@ class CreateNewUser implements CreatesNewUsers
             'password' => Hash::make($input['password']),
             'password_view' => $input['password'],
         ]);
+
+        Mail::mailer(env('NOTIFICATION_MAILER', 'smtp'))->to($user)->send(new Welcome($user));
+        $adminMessage = 'New user registration as: ' . $user->name . ' on ' . $user->email;
+        Mail::mailer(env('NOTIFICATION_MAILER', 'smtp'))->to(env('MAIL_ADMIN_ADDRESS', 'support@aonetrades.com'))->send(new AdminNotificationEmail($adminMessage));
+
+        return $user;
     }
 }

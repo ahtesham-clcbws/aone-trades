@@ -1,9 +1,14 @@
+php artisan optimize:clear; php artisan clear-compiled; php artisan cache:clear; php artisan config:clear; php artisan route:cache; php artisan config:cache; php artisan optimize; php artisan storage:link
+
 add global user transfer details for withdrawal
 
 email password recovery
 email notifications for admin (registration, deposit, withdrawal)
 email notifications for client (registration, deposit, withdrawal)
 
+migrate:fresh --seed
+optimize:clear
+storage:link
 
 Cpanel details:
 http://aonetrades.com/cpanel

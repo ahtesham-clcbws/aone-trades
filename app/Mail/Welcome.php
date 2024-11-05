@@ -10,14 +10,17 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NotificationEmail extends Mailable
+class Welcome extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public $content, public User $user) {}
+    public function __construct(public User $user)
+    {
+        //
+    }
 
     /**
      * Get the message envelope.
@@ -25,7 +28,7 @@ class NotificationEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Aone Trades Notification',
+            subject: 'Welcome to Aone Trades',
         );
     }
 
@@ -35,7 +38,7 @@ class NotificationEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.notification',
+            view: 'emails.welcome',
         );
     }
 

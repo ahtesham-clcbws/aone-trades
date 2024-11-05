@@ -12,6 +12,7 @@
     <x-mary-menu-item title="Plan Change Requests" icon="o-light-bulb" link="{{ route('admin.user.plans') }}" :badge="$pendingPlanChange" badge-classes="!badge-warning float-right" />
     <x-mary-menu-item title="KYC Requests" icon="o-identification" link="{{ route('admin.user.kyc.requests') }}" :badge="$pendingKYC" badge-classes="!badge-warning float-right" />
     <x-mary-menu-item title="IB Partner Requests" icon="o-user-group" link="{{ route('admin.user.ibpartner') }}" :badge="$IBPartnerRequests" badge-classes="!badge-warning float-right" />
+    <x-mary-menu-item title="Trading Account Requests" icon="o-chart-bar-square" link="{{ route('admin.user.tradingaccount') }}" :badge="$TradingAccountRequests" badge-classes="!badge-warning float-right" />
 
     <x-mary-menu-separator />
 

@@ -122,6 +122,7 @@
         <x-slot:content>
             {{ $slot }}
             <livewire:user.menu.i-b-partner-modal />
+            <livewire:user.menu.trading-account-modal />
         </x-slot:content>
     </x-mary-main>
 

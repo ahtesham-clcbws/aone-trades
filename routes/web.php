@@ -16,7 +16,8 @@ use App\Livewire\Website\Pages\PaymentMethods;
 use App\Livewire\Website\Pages\SyntheticIndices;
 
 use App\Livewire\User\Account\Kyc;
-use App\Livewire\User\Account\Profile;
+use App\Livewire\User\Account\Address;
+use App\Livewire\User\Account\BankInfo;
 use App\Livewire\User\Dashboard as UserDashboard;
 use App\Livewire\User\Download;
 use App\Livewire\User\Fund\Deposit;
@@ -27,22 +28,17 @@ use App\Livewire\User\History\Withdraw as HistoryWithdraw;
 
 use App\Livewire\Admin\Dashboard as AdminDashboard;
 use App\Livewire\Admin\Deposit\Requests as DepositRequests;
-use App\Livewire\Admin\Deposit\Details as DepositDetails;
 use App\Livewire\Admin\Withdrawal\Requests as WithdrawalRequests;
-use App\Livewire\Admin\Withdrawal\Details as WithdrawalDetails;
 use App\Livewire\Admin\User\Table as UserTable;
 use App\Livewire\Admin\User\Profile as UserProfile;
 use App\Livewire\Admin\User\PlanChangeRequest as UserPlanChangeRequest;
 use App\Livewire\Admin\User\KYC\Requests as UserKycRequests;
-use App\Livewire\Admin\User\KYC\Details as UserKycDetails;
 use App\Livewire\Admin\Visitors as PageViews;
 use App\Livewire\Admin\Settings\Help as AdminHelpSection;
 use App\Livewire\Admin\Settings\Downloads as AdminDownloadsSection;
 use App\Livewire\Admin\User\IBPartnerRequest;
-use App\Livewire\User\Account\Address;
-use App\Livewire\User\Account\BankInfo;
+use App\Livewire\Admin\User\TradingAccountRequest;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Auth;
 
 Route::get('artisan/{command}', function ($command) {
     try {
@@ -53,12 +49,18 @@ Route::get('artisan/{command}', function ($command) {
     }
 });
 
-Route::any('test', function () {
-    return print_r([
-        'SERVER' => $_SERVER,
-        'REQUEST' => $_REQUEST
-    ]);
-});
+// Route::any('test', function () {
+//     $data = [
+//         'name' => 'Ahtesham Chaudhary',
+//         'email' => 'ahtesham2000@gmail.com',
+//         'message' => 'We are happy to inform you that your account has been created.<br />You can use button above to log in.'
+//     ];
+//     return view('emails.notification', $data);
+//     // return print_r([
+//     //     'SERVER' => $_SERVER,
+//     //     'REQUEST' => $_REQUEST
+//     // ]);
+// });
 Route::get('/', Homepage::class)->name('homepage');
 
 Route::get('info', Info::class)->name('info');
@@ -134,6 +136,7 @@ Route::middleware([
                     });
                 });
                 Route::get('ib-partner-requests', IBPartnerRequest::class)->name('ibpartner');
+                Route::get('trading-account-requests', TradingAccountRequest::class)->name('tradingaccount');
 
                 Route::get('/', function () {
                     return redirect('/admin/user/all');

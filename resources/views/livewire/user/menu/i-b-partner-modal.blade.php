@@ -9,7 +9,7 @@
         @endif
     </div>
     <div class="modal-action">
-        <x-mary-button type="button" label="Cancel" @click="$wire.openConfirmModal = true" onclick="openConfirmModal.close()" />
+        <x-mary-button type="button" label="Cancel" @click="$wire.openConfirmModal = false" onclick="openConfirmModal.close()" />
         @if (!$IbPartnerRequest)
         <x-mary-button type="button" label="Yes" class="btn-primary" wire:click="confirmIBPartner()" spinner="confirmIBPartner" />
         @endif

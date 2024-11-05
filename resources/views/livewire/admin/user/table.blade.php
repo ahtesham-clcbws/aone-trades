@@ -28,21 +28,27 @@
             @endscope
 
             @scope('cell_status', $user)
-            <x-mary-badge value="{{ ucfirst($user->status) }}" class="badge-{{ $user->status == 'rejected' ? 'error' : ($user->status == 'approved' ? 'success' : 'warning') }}" />
-            @if ($user->status == 'rejected' && $user->reject_notes)
-            <span class="text-red-500">{{ $user->reject_notes }}</span>
-            @endif
+            <div class="flex flex-col gap-2">
+                <x-mary-badge value="{{ ucfirst($user->status) }}" class="badge-{{ $user->status == 'rejected' ? 'error' : ($user->status == 'approved' ? 'success' : 'warning') }}" />
+                @if ($user->status == 'rejected' && $user->reject_notes)
+                <span class="text-red-500">{{ $user->reject_notes }}</span>
+                @endif
+
+                @if (!$user->kyc)
+                <x-mary-button icon="o-identification" class="btn-circle btn-sm bg-orange-500" title="Manual KYC" spinner="openManualKycModal('{{$user->id}}')" wire:click="openManualKycModal('{{$user->id}}')" />
+                @endif
+            </div>
             @endscope
 
             @scope('cell_actions', $user)
             <div class="flex gap-2">
-                <x-mary-button icon="o-eye" class="btn-circle btn-sm bg-blue-500" title="View User" wire:click="viewUser('{{$user->id}}')" />
+                <x-mary-button icon="o-eye" class="btn-circle btn-sm bg-blue-500" title="View User" spinner="viewUser('{{$user->id}}')" wire:click="viewUser('{{$user->id}}')" />
             </div>
             @endscope
         </x-mary-table>
     </x-mary-card>
 
-    <x-mary-modal wire:model="showUserDetailsModal" class="backdrop-blur">
+    <x-mary-modal wire:model="showUserDetailsModal" class="backdrop-blur" title="{{$thisUser?->name}}">
         <div class="w-full">
             <table class="customTable w-full">
                 <tr>
@@ -93,5 +99,31 @@
                 @endif
             </table>
         </div>
+    </x-mary-modal>
+
+    <x-mary-modal wire:model="showManualKycModal" class="backdrop-blur" title="{{$kycUser?->name}} - KYC">
+        <x-mary-form wire:submit="saveApproveKyc">
+
+            <div class="input input-primary grid md:grid-cols-2 items-center gap-3 p-0 overflow-hidden">
+                <label class="text-gray-400 ps-4 leading-none">Attach Pancard</label>
+                <x-mary-file wire:model="pancard_proof" accept="image/*" class="*:w-full *:border-0 m-0 *:-m-0.5 *:!rounded-none" required />
+            </div>
+
+            <div class="input input-primary grid md:grid-cols-2 items-center gap-3 p-0 overflow-hidden">
+                <label class="text-gray-400 ps-4 leading-none">
+                    Attach Address Proof (Front)
+                </label>
+                <x-mary-file wire:model="address_proof" accept="image/*" class="*:w-full *:border-0 m-0 *:-m-0.5 *:!rounded-none" required />
+            </div>
+            <div class="input input-primary grid md:grid-cols-2 items-center gap-3 p-0 overflow-hidden">
+                <label class="text-gray-400 ps-4 leading-none">
+                    Attach Address Proof (Back)
+                </label>
+                <x-mary-file wire:model="address_proof_back" accept="image/*" class="*:w-full *:border-0 m-0 *:-m-0.5 *:!rounded-none" required />
+            </div>
+            <div>
+                <x-mary-button label="Submit KYC" class="btn-primary" type="submit" spinner="saveApproveKyc" />
+            </div>
+        </x-mary-form>
     </x-mary-modal>
 </div>

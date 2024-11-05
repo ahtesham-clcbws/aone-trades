@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Observers\UserDepositObserver;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+#[ObservedBy([UserDepositObserver::class])]
 class UserDeposit extends Model
 {
     protected $fillable = [

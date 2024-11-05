@@ -95,21 +95,21 @@ class User extends Authenticatable implements CoreAuthenticatable
         if ($this->kyc) {
             $status = $this->kyc->status;
         }
-        if (
-            !$this->profile_photo_path || !$this->date_of_birth || !$this->gender || !$this->timezone || !$this->address
-            || !$this->pincode || !$this->city || !$this->state
-            || !$this->country
-        ) {
-            $status = 'pending';
-        }
-        if ($this->kyc && $this->kyc->status == 'rejected') {
-            $status = 'rejected';
-        }
+        // if (
+        //     !$this->profile_photo_path || !$this->date_of_birth || !$this->gender || !$this->timezone || !$this->address
+        //     || !$this->pincode || !$this->city || !$this->state
+        //     || !$this->country
+        // ) {
+        //     $status = 'pending';
+        // }
+        // if ($this->kyc && $this->kyc->status == 'rejected') {
+        //     $status = 'rejected';
+        // }
         return $status;
     }
     public function getStatusAttribute()
     {
-        return $this->getKycStatus();;
+        return $this->getKycStatus();
     }
     public function getKycStatusBadgeData()
     {
@@ -139,6 +139,8 @@ class User extends Authenticatable implements CoreAuthenticatable
     {
         return $this->hasMany(UserWithdrawl::class)->orderBy('id', 'desc');
     }
+
+
     public function getIsIBPartnerAttribute(): bool
     {
         return IbPartnerRequest::where('user_id', $this->id)->where('status', 'approved')->first() ? true : false;
@@ -146,5 +148,15 @@ class User extends Authenticatable implements CoreAuthenticatable
     public function ib_partnet_request(): HasOne
     {
         return $this->hasOne(IbPartnerRequest::class);
+    }
+
+
+    public function getIsTradingAccountAttribute(): bool
+    {
+        return TradingAccountRequest::where('user_id', $this->id)->where('status', 'approved')->first() ? true : false;
+    }
+    public function trading_account_request(): HasOne
+    {
+        return $this->hasOne(TradingAccountRequest::class);
     }
 }

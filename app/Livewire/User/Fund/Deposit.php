@@ -48,9 +48,10 @@ class Deposit extends Component
                 'deposit_receipt' => $filepath,
             ]);
 
-            return redirect()->to('/user/history/deposit');
+            redirect()->to('/user/history/deposit');
         } catch (\Throwable $th) {
             $this->error($th->getMessage());
+            throw $th;
         }
     }
 

@@ -99,7 +99,7 @@
             <p class="text-wrap break-all">
                 Please send <b>USDT TRC-20</b> to the following address
             </p>
-            <img src="/img/QR/qr-usdt.png" class="w-full max-w-sm" />
+            <img src="{{ env('USDT_QR_FILE') }}" class="w-full max-w-sm" />
             <div class="border rounded flex justify-between items-center gap-4 py-1 px-2">
                 <div class="text-start">
                     <small class="text-gray-600">When asked, copy-paste this wallet address:</small> <br />
@@ -115,6 +115,7 @@
                 Deposit via UPI/QR
             </p>
 
+            @if (env('UPI_QR_FILE') && env('UPI_ADDRESS'))
             <img src="/img/QR/qr-upi.png" class="w-full max-w-sm" />
             <div class="border rounded flex justify-between items-center gap-4 py-1 px-2 min-w-72">
                 <div class="text-start">
@@ -123,6 +124,9 @@
                 </div>
                 <x-mary-icon name="o-clipboard-document-list" class="ms-3 cursor-pointer" title="{{ env('UPI_ADDRESS') }}" x-clipboard />
             </div>
+            @else
+            <h4 class="text-3xl font-bold py-8">N/A</h4>
+            @endif
         </div>
         @endif
         @if ($showSection == 'bank')
@@ -131,28 +135,60 @@
                 Manual Bank Transfer
             </p>
 
-            <div class="border rounded py-1 min-w-72 mt-3">
-                <div class="text-start *:grid *:grid-cols-2 *:px-3 *:py-1 *:gap-3 divide-y">
-                    <div>
-                        <b>Name:</b><span>{{ env('BANK_ACCOUNT_NAME') }}</span>
-                    </div>
-                    <div>
-                        <b>Bank:</b><span>{{ env('BANK_BANK_NAME') }}</span>
-                    </div>
-                    <div>
-                        <b>A/C No:</b><span>{{ env('BANK_ACCOUNT_NUMBER') }}</span>
-                    </div>
-                    <div>
-                        <b>IFSC Code:</b><span>{{ env('BANK_IFSC_CODE') }}</span>
-                    </div>
-                    <div>
-                        <b>MICR Code:</b><span>{{ env('BANK_MICR_CODE') }}</span>
-                    </div>
-                    <div>
-                        <b>Branch Address:</b><span>{{ env('BANK_BRANCH_ADDRESS') }}</span>
+            @if (env('BANK_ACCOUNT_NAME') == 'TestBank' && env('BANK_ACCOUNT_NAME_2') == 'TestBank')
+            <h4 class="text-3xl font-bold py-8">N/A</h4>
+            @else
+            <div class="grid md:grid-cols-2 gap-4">
+                @if (env('BANK_ACCOUNT_NAME') != 'TestBank')
+                <div class="border rounded py-1 w-full mt-3">
+                    <div class="text-start *:grid *:grid-cols-2 *:px-3 *:py-1 *:gap-3 divide-y">
+                        <div>
+                            <b>Name:</b><span>{{ env('BANK_ACCOUNT_NAME') }}</span>
+                        </div>
+                        <div>
+                            <b>Bank:</b><span>{{ env('BANK_BANK_NAME') }}</span>
+                        </div>
+                        <div>
+                            <b>A/C No:</b><span>{{ env('BANK_ACCOUNT_NUMBER') }}</span>
+                        </div>
+                        <div>
+                            <b>IFSC Code:</b><span>{{ env('BANK_IFSC_CODE') }}</span>
+                        </div>
+                        <div>
+                            <b>MICR Code:</b><span>{{ env('BANK_MICR_CODE') }}</span>
+                        </div>
+                        <div>
+                            <b>Branch Address:</b><span>{{ env('BANK_BRANCH_ADDRESS') }}</span>
+                        </div>
                     </div>
                 </div>
+                @endif
+                @if (env('BANK_ACCOUNT_NAME_2') != 'TestBank')
+                <div class="border rounded py-1 w-full mt-3">
+                    <div class="text-start *:grid *:grid-cols-2 *:px-3 *:py-1 *:gap-3 divide-y">
+                        <div>
+                            <b>Name:</b><span>{{ env('BANK_ACCOUNT_NAME_2') }}</span>
+                        </div>
+                        <div>
+                            <b>Bank:</b><span>{{ env('BANK_BANK_NAME_2') }}</span>
+                        </div>
+                        <div>
+                            <b>A/C No:</b><span>{{ env('BANK_ACCOUNT_NUMBER_2') }}</span>
+                        </div>
+                        <div>
+                            <b>IFSC Code:</b><span>{{ env('BANK_IFSC_CODE_2') }}</span>
+                        </div>
+                        <div>
+                            <b>MICR Code:</b><span>{{ env('BANK_MICR_CODE_2') }}</span>
+                        </div>
+                        <div>
+                            <b>Branch Address:</b><span>{{ env('BANK_BRANCH_ADDRESS_2') }}</span>
+                        </div>
+                    </div>
+                </div>
+                @endif
             </div>
+            @endif
         </div>
         @endif
 

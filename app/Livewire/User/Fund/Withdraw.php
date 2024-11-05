@@ -127,9 +127,10 @@ class Withdraw extends Component
 
             $newRequest->save();
 
-            return redirect()->to('/user/history/withdraw');
+            redirect()->to('/user/history/withdraw');
         } catch (\Throwable $th) {
             $this->error($th->getMessage());
+            throw $th;
         }
     }
     public function render()
