@@ -28,7 +28,7 @@
             <x-mary-menu-item title="Deposit History" icon="o-bars-arrow-up" link="{{ route('user.history.deposit') }}" />
             <x-mary-menu-item title="Withdraw History" icon="o-bars-arrow-down" link="{{ route('user.history.withdraw') }}" />
 
-            <x-mary-menu-item title="Trade request app" icon="o-chart-bar-square" onclick="openTradingAccountModal.showModal()" />
+            <x-mary-menu-item title="Trade Request App" icon="o-chart-bar-square" onclick="openTradingAccountModal.showModal()" />
 
             <x-mary-menu-sub title="Manage Account" icon="o-user">
                 <x-mary-menu-item title="Personal Details" link="{{ route('profile.show') }}" />
