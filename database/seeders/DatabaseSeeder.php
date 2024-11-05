@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             [
                 'firstname' => 'Admin',
                 'lastname' => 'User',
-                'email' => 'suppert@aonetrades.com',
+                'email' => 'support@aonetrades.com',
                 'password' => Hash::make(23988725),
                 'role' => 'admin',
                 'gender' => 'Male',
