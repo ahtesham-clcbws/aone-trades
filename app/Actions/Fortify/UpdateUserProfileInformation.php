@@ -21,9 +21,9 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
         Validator::make($input, [
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'phone_number' => ['required', 'string', 'max:13'],
-            'gender' => ['required', 'string'],
-            'date_of_birth' => ['required', 'before:' . Carbon::now()->subYears(18)->format('Y-m-d')],
+            'phone_number' => ['required_if:role,user', 'string', 'max:13'],
+            'gender' => ['required_if:role,user', 'string'],
+            'date_of_birth' => ['required_if:role,user', 'before:' . Carbon::now()->subYears(18)->format('Y-m-d')],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'photo' => ['required', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
