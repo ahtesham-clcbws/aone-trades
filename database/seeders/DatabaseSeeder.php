@@ -36,7 +36,9 @@ class DatabaseSeeder extends Seeder
                 'role' => 'admin',
                 'gender' => 'Male',
                 'created_at' => Carbon::now(),
-                'email_verified_at' => Carbon::now()
+                'email_verified_at' => Carbon::now(),
+                'date_of_birth' => '1990-01-01',
+                'phone_number' => '9898989898'
             ],
             // [
             //     'firstname' => 'Ahtesham',
