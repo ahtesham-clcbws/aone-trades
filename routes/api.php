@@ -23,7 +23,7 @@ Route::any('pwd', function () {
     echo $process->getOutput();
 });
 Route::any('storage-link', function () {
-    $process = Process::fromShellCommandline('ln -s /home1/createct/aonetrades.cwpdigital.com/storage/app/public /home1/createct/aonetrades.cwpdigital.com/public/storage');
+    $process = Process::fromShellCommandline('ln -s /home2/aonetrades/public_html/storage/app/public /home2/aonetrades/public_html/public/storage');
     $process->run();
 
     // executes after the command finishes
