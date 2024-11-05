@@ -27,25 +27,25 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => Carbon::now()
             ],
             [
-                'firstname' => 'Ahtesham',
-                'lastname' => 'admin',
-                'email' => 'ahtesham2000@ymail.com',
+                'firstname' => 'Admin',
+                'lastname' => 'User',
+                'email' => 'suppert@aonetrades.com',
                 'password' => Hash::make(23988725),
                 'role' => 'admin',
                 'gender' => 'Male',
                 'created_at' => Carbon::now(),
                 'email_verified_at' => Carbon::now()
             ],
-            [
-                'firstname' => 'Ahtesham',
-                'lastname' => 'user',
-                'email' => 'ahtesham2000@mailinator.com',
-                'password' => Hash::make(23988725),
-                'role' => 'user',
-                'gender' => 'Male',
-                'created_at' => Carbon::now(),
-                'email_verified_at' => Carbon::now()
-            ]
+            // [
+            //     'firstname' => 'Ahtesham',
+            //     'lastname' => 'user',
+            //     'email' => 'ahtesham2000@mailinator.com',
+            //     'password' => Hash::make(23988725),
+            //     'role' => 'user',
+            //     'gender' => 'Male',
+            //     'created_at' => Carbon::now(),
+            //     'email_verified_at' => Carbon::now()
+            // ]
         ]);
         $this->call([
             Timezone::class,
