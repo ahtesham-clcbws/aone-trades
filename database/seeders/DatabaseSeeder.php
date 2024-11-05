@@ -29,8 +29,8 @@ class DatabaseSeeder extends Seeder
                 'phone_number' => '9810763314'
             ],
             [
-                'firstname' => 'Admin',
-                'lastname' => 'User',
+                'firstname' => 'Support',
+                'lastname' => 'Admin',
                 'email' => 'support@aonetrades.com',
                 'password' => Hash::make(23988725),
                 'role' => 'admin',
