@@ -39,6 +39,8 @@ class User extends Authenticatable implements CoreAuthenticatable, MustVerifyEma
         'isActive'
     ];
 
+    protected $guarded = ['role'];
+
     /**
      * The attributes that should be hidden for serialization.
      *

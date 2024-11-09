@@ -4,7 +4,7 @@
  * Author URI  : http://www.indonez.com
  *
  * Indonez Copyright 2020 All Rights Reserved.
- * -------------------------------------------------------------------------- 
+ * --------------------------------------------------------------------------
  * javascript handle initialization
     1. Slideshow
     2. Mobile nav button
@@ -34,9 +34,15 @@
                     {
                         name: 'Log in',             // custom button name
                         url: '',                    // custom button url
-                        type: 'primary',            // button type (default, primary, secondary, danger, text)
+                        type: 'default',            // button type (default, primary, secondary, danger, text)
                         icon: 'sign-in-alt'         // button icon, you can use all icons from here : https://fontawesome.com/icons?d=gallery&s=solid&m=free
                     },
+                    {
+                        name: 'Sign Up',             // custom button name
+                        url: '/register',                    // custom button url
+                        type: 'primary',            // button type (default, primary, secondary, danger, text)
+                        icon: 'user-plus'         // button icon, you can use all icons from here : https://fontawesome.com/icons?d=gallery&s=solid&m=free
+                    }
                 ]
             }).init();
         },
@@ -65,7 +71,7 @@
             HomepageApp.theme_tradingview();
         }
     }
-    
+
     document.addEventListener('DOMContentLoaded', function() {
         HomepageApp.theme_init();
     });

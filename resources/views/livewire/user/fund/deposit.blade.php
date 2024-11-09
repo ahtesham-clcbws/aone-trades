@@ -115,18 +115,35 @@
                 Deposit via UPI/QR
             </p>
 
-            @if (env('UPI_QR_FILE') && env('UPI_ADDRESS'))
-            <img src="/img/QR/qr-upi.png" class="w-full max-w-sm" />
-            <div class="border rounded flex justify-between items-center gap-4 py-1 px-2 min-w-72">
-                <div class="text-start">
-                    <small class="text-gray-600">Copy UPI address:</small> <br />
-                    {{ env('UPI_ADDRESS') }}
+            <div class="grid md:grid-cols-2 gap-4 mt-6">
+
+                @if (env('UPI_QR_FILE') && env('UPI_ADDRESS'))
+                <div class="text-center flex items-center justify-center flex-col gap-4">
+                    <img src="{{ env('UPI_QR_FILE') }}" class="w-full max-w-sm" />
+                    <div class="border rounded flex justify-between items-center gap-4 py-1 px-2 min-w-72 w-full">
+                        <div class="text-start">
+                            <small class="text-gray-600">Copy UPI address:</small> <br />
+                            {{ env('UPI_ADDRESS') }}
+                        </div>
+                        <x-mary-icon name="o-clipboard-document-list" class="ms-3 cursor-pointer" title="{{ env('UPI_ADDRESS') }}" x-clipboard />
+                    </div>
                 </div>
-                <x-mary-icon name="o-clipboard-document-list" class="ms-3 cursor-pointer" title="{{ env('UPI_ADDRESS') }}" x-clipboard />
+                @endif
+
+                @if (env('UPI_QR_FILE_2') && env('UPI_ADDRESS_2'))
+                <div class="text-center flex items-center justify-center flex-col gap-4">
+                    <img src="{{ env('UPI_QR_FILE_2') }}" class="w-full max-w-sm" />
+                    <div class="border rounded flex justify-between items-center gap-4 py-1 px-2 min-w-72 w-full">
+                        <div class="text-start">
+                            <small class="text-gray-600">Copy UPI address:</small> <br />
+                            {{ env('UPI_ADDRESS_2') }}
+                        </div>
+                        <x-mary-icon name="o-clipboard-document-list" class="ms-3 cursor-pointer" title="{{ env('UPI_ADDRESS_2') }}" x-clipboard />
+                    </div>
+                </div>
+                @endif
             </div>
-            @else
-            <h4 class="text-3xl font-bold py-8">N/A</h4>
-            @endif
+
         </div>
         @endif
         @if ($showSection == 'bank')
@@ -154,12 +171,16 @@
                         <div>
                             <b>IFSC Code:</b><span>{{ env('BANK_IFSC_CODE') }}</span>
                         </div>
+                        @if (env('BANK_MICR_CODE'))
                         <div>
                             <b>MICR Code:</b><span>{{ env('BANK_MICR_CODE') }}</span>
                         </div>
+                        @endif
+                        @if (env('BANK_BRANCH_ADDRESS'))
                         <div>
                             <b>Branch Address:</b><span>{{ env('BANK_BRANCH_ADDRESS') }}</span>
                         </div>
+                        @endif
                     </div>
                 </div>
                 @endif
@@ -178,12 +199,16 @@
                         <div>
                             <b>IFSC Code:</b><span>{{ env('BANK_IFSC_CODE_2') }}</span>
                         </div>
+                        @if (env('BANK_MICR_CODE_2'))
                         <div>
                             <b>MICR Code:</b><span>{{ env('BANK_MICR_CODE_2') }}</span>
                         </div>
+                        @endif
+                        @if (env('BANK_BRANCH_ADDRESS_2'))
                         <div>
                             <b>Branch Address:</b><span>{{ env('BANK_BRANCH_ADDRESS_2') }}</span>
                         </div>
+                        @endif
                     </div>
                 </div>
                 @endif

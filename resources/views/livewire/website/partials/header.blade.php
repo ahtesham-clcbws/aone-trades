@@ -11,9 +11,9 @@
                     <ul class="uk-navbar-nav uk-visible@m">
                         <li><a href="{{ route('homepage') }}">Home</a></li>
 
-                        </li>
                         <li><a href="{{ route('info') }}">Info </a></li>
-                        <li><a href="#">Trading Platform<span data-uk-navbar-parent-icon></span></a>
+                        <li>
+                            <a href="#">Trading Platform<span data-uk-navbar-parent-icon></span></a>
                             <div class="uk-navbar-dropdown">
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
                                     <li><a href="{{ route('accountType') }}">Account Type</a></li>
@@ -23,8 +23,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li><a href="{{ route('ibPartner') }}">IB Partners</a>
-                        </li>
+                        <li><a href="{{ route('ibPartner') }}">IB Partners</a></li>
                         <li><a href="{{ route('contact') }}">Contact</a></li>
                     </ul>
                 </div>
