@@ -28,6 +28,7 @@ use App\Livewire\User\History\Withdraw as HistoryWithdraw;
 
 use App\Livewire\Admin\Dashboard as AdminDashboard;
 use App\Livewire\Admin\Deposit\Requests as DepositRequests;
+use App\Livewire\Admin\Settings\DepositDetailsSettings;
 use App\Livewire\Admin\Withdrawal\Requests as WithdrawalRequests;
 use App\Livewire\Admin\User\Table as UserTable;
 use App\Livewire\Admin\User\Profile as UserProfile;
@@ -148,6 +149,7 @@ Route::middleware([
             Route::group(['prefix' => 'settings', 'as' => 'settings.'], function () {
                 Route::get('downloads', AdminDownloadsSection::class)->name('downloads');
                 Route::get('help', AdminHelpSection::class)->name('help');
+                Route::get('deposit-details', DepositDetailsSettings::class)->name('deposit-details');
 
                 Route::get('/', function () {
                     return redirect('/admin/settings/help');

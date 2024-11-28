@@ -56,3 +56,9 @@ Emails:-
             IB Partner requested (1)
 
 Create single template with only dynamic content and user name
+
+NOV 28th
+User download section, Downloads not working - RESOLVED
+Need Deposit details settings page in admin panel for Tether, UPI, & Bank Details, so it will reflet into User Dashboard - DONE
+This statistics should be linked with their respective links - DONE
+User Ban/Un-Ban - DONE

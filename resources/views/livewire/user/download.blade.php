@@ -4,16 +4,22 @@
             {{ __('Downloads') }}
         </h2>
     </div>
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid md:grid-cols-3 xl:grid-cols-4 gap-4">
         @foreach ($downloads as $download)
-        <x-mary-card>
-            <h4 class="text-xl font-semibold mb-3">{{ $download->title }}</h4>
-            {{ $download->details }}
-            <x-slot:figure>
-                <img src="/storage/{{$download->image}}" class="p-5 object-contain max-w-56 mx-auto" />
-            </x-slot:figure>
-            <x-mary-button label="Download" class="btn-primary mt-5 w-full btn-sm" />
-        </x-mary-card>
+        <div class="bg-white shadow rounded-lg flex flex-col justify-between overflow-hidden">
+            <div class="w-full">
+                <img src="/storage/{{$download->image}}" class="w-full h-44 object-cover" />
+                <div class="p-4">
+                    <h4 class="text-xl font-semibold mb-3">{{ $download->title }}</h4>
+                    <div class="break-all">{{ $download->details }}</div>
+                </div>
+            </div>
+            <div class="bg-primary">
+                <a class="w-full h-12 flex items-center justify-center gap-2 text-lg font-semibold" href="/storage/{{$download->file}}" target="_blank">
+                <x-mary-icon name="o-arrow-down-tray" class="w-5 h-5" /> Download
+                </a>
+            </div>
+        </div>
         @endforeach
     </div>
 </div>

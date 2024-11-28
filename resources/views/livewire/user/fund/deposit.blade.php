@@ -16,6 +16,7 @@
         </div>
         <div class="grid md:grid-cols-3 gap-3 mt-4 mb-3">
 
+            @if (count($depositDetailsTether))
             <x-mary-button class="btn-outline h-auto p-8" spinner="setShowSection('usdt')" wire:click="setShowSection('usdt')">
                 <div class="flex items-center justify-center flex-col">
                     <div class="flex gap-2 items-center font-semibold text-2xl">
@@ -53,7 +54,9 @@
                     <span class="mt-3">USDT TRC-20</span>
                 </div>
             </x-mary-button>
+            @endif
 
+            @if (count($depositDetailsUPI))
             <x-mary-button class="btn-outline h-auto p-8" spinner="setShowSection('upi')" wire:click="setShowSection('upi')">
                 <div class="flex items-center justify-center flex-col">
                     <div class="flex gap-2 items-center font-semibold text-2xl">
@@ -68,7 +71,9 @@
                     <span class="mt-3">Transfer via UPI ID/QR Code</span>
                 </div>
             </x-mary-button>
+            @endif
 
+            @if (count($depositDetailsBank))
             <x-mary-button class="btn-outline h-auto p-8" spinner="setShowSection('bank')" wire:click="setShowSection('bank')">
                 <div class="flex items-center justify-center flex-col">
                     <div class="flex gap-2 items-center font-semibold text-2xl">
@@ -88,6 +93,7 @@
                     <span class="mt-3">Manual Bank Transfer</span>
                 </div>
             </x-mary-button>
+            @endif
 
         </div>
 
@@ -99,14 +105,23 @@
             <p class="text-wrap break-all">
                 Please send <b>USDT TRC-20</b> to the following address
             </p>
-            <img src="{{ env('USDT_QR_FILE') }}" class="w-full max-w-sm" />
-            <div class="border rounded flex justify-between items-center gap-4 py-1 px-2">
-                <div class="text-start">
-                    <small class="text-gray-600">When asked, copy-paste this wallet address:</small> <br />
-                    {{ env('USDT_ADDRESS') }}
+
+            <div class="grid <?= count($depositDetailsTether) > 1 ? 'md:grid-cols-2' : '' ?>  gap-4 mt-6">
+                @foreach ($depositDetailsTether as $tetherDetails)
+                <div class="text-center flex items-center justify-center flex-col gap-4">
+                    <img src="{{ '/storage/'.$tetherDetails->qr_code }}" class="w-full max-w-sm" />
+                    <div class="border rounded flex justify-between items-center gap-4 py-1 px-2 min-w-72 w-full">
+                        <div class="text-start">
+                            <small class="text-gray-600">When asked, copy-paste this wallet address:</small> <br />
+                            {{ $tetherDetails->address }}
+                        </div>
+                        <x-mary-icon name="o-clipboard-document-list" class="ms-3 cursor-pointer" title="{{ $tetherDetails->address }}" x-clipboard />
+                    </div>
                 </div>
-                <x-mary-icon name="o-clipboard-document-list" class="ms-3 cursor-pointer" title="{{ env('USDT_ADDRESS') }}" x-clipboard />
+                @endforeach
+
             </div>
+
         </div>
         @endif
         @if ($showSection == 'upi')
@@ -115,33 +130,20 @@
                 Deposit via UPI/QR
             </p>
 
-            <div class="grid md:grid-cols-2 gap-4 mt-6">
-
-                @if (env('UPI_QR_FILE') && env('UPI_ADDRESS'))
+            <div class="grid <?= count($depositDetailsUPI) > 1 ? 'md:grid-cols-2' : '' ?>  gap-4 mt-6">
+                @foreach ($depositDetailsUPI as $upiDetails)
                 <div class="text-center flex items-center justify-center flex-col gap-4">
-                    <img src="{{ env('UPI_QR_FILE') }}" class="w-full max-w-sm" />
+                    <img src="{{ '/storage/'.$upiDetails->qr_code }}" class="w-full max-w-sm" />
                     <div class="border rounded flex justify-between items-center gap-4 py-1 px-2 min-w-72 w-full">
                         <div class="text-start">
                             <small class="text-gray-600">Copy UPI address:</small> <br />
-                            {{ env('UPI_ADDRESS') }}
+                            {{ $upiDetails->address }}
                         </div>
-                        <x-mary-icon name="o-clipboard-document-list" class="ms-3 cursor-pointer" title="{{ env('UPI_ADDRESS') }}" x-clipboard />
+                        <x-mary-icon name="o-clipboard-document-list" class="ms-3 cursor-pointer" title="{{ $upiDetails->address }}" x-clipboard />
                     </div>
                 </div>
-                @endif
+                @endforeach
 
-                @if (env('UPI_QR_FILE_2') && env('UPI_ADDRESS_2'))
-                <div class="text-center flex items-center justify-center flex-col gap-4">
-                    <img src="{{ env('UPI_QR_FILE_2') }}" class="w-full max-w-sm" />
-                    <div class="border rounded flex justify-between items-center gap-4 py-1 px-2 min-w-72 w-full">
-                        <div class="text-start">
-                            <small class="text-gray-600">Copy UPI address:</small> <br />
-                            {{ env('UPI_ADDRESS_2') }}
-                        </div>
-                        <x-mary-icon name="o-clipboard-document-list" class="ms-3 cursor-pointer" title="{{ env('UPI_ADDRESS_2') }}" x-clipboard />
-                    </div>
-                </div>
-                @endif
             </div>
 
         </div>
@@ -152,68 +154,37 @@
                 Manual Bank Transfer
             </p>
 
-            @if (env('BANK_ACCOUNT_NAME') == 'TestBank' && env('BANK_ACCOUNT_NAME_2') == 'TestBank')
-            <h4 class="text-3xl font-bold py-8">N/A</h4>
-            @else
-            <div class="grid md:grid-cols-2 gap-4">
-                @if (env('BANK_ACCOUNT_NAME') != 'TestBank')
+            <div class="grid <?= count($depositDetailsBank) > 1 ? 'md:grid-cols-2' : '' ?>  gap-4 mt-6">
+                @foreach ($depositDetailsBank as $bankDetails)
                 <div class="border rounded py-1 w-full mt-3">
                     <div class="text-start *:grid *:grid-cols-2 *:px-3 *:py-1 *:gap-3 divide-y">
                         <div>
-                            <b>Name:</b><span>{{ env('BANK_ACCOUNT_NAME') }}</span>
+                            <b>A/C No:</b><span>{{ $bankDetails->address }}</span>
                         </div>
                         <div>
-                            <b>Bank:</b><span>{{ env('BANK_BANK_NAME') }}</span>
+                            <b>A/C Name:</b><span>{{ $bankDetails->account_name }}</span>
                         </div>
                         <div>
-                            <b>A/C No:</b><span>{{ env('BANK_ACCOUNT_NUMBER') }}</span>
+                            <b>Bank Name:</b><span>{{ $bankDetails->bank_name }}</span>
                         </div>
                         <div>
-                            <b>IFSC Code:</b><span>{{ env('BANK_IFSC_CODE') }}</span>
+                            <b>IFSC Code:</b><span>{{ $bankDetails->ifsc_code }}</span>
                         </div>
-                        @if (env('BANK_MICR_CODE'))
+                        @if ($bankDetails->micr_code)
                         <div>
-                            <b>MICR Code:</b><span>{{ env('BANK_MICR_CODE') }}</span>
+                            <b>MICR Code:</b><span>{{ $bankDetails->micr_code }}</span>
                         </div>
                         @endif
-                        @if (env('BANK_BRANCH_ADDRESS'))
+                        @if ($bankDetails->branch_address)
                         <div>
-                            <b>Branch Address:</b><span>{{ env('BANK_BRANCH_ADDRESS') }}</span>
+                            <b>Branch Address:</b><span>{{ $bankDetails->branch_address }}</span>
                         </div>
                         @endif
                     </div>
                 </div>
-                @endif
-                @if (env('BANK_ACCOUNT_NAME_2') != 'TestBank')
-                <div class="border rounded py-1 w-full mt-3">
-                    <div class="text-start *:grid *:grid-cols-2 *:px-3 *:py-1 *:gap-3 divide-y">
-                        <div>
-                            <b>Name:</b><span>{{ env('BANK_ACCOUNT_NAME_2') }}</span>
-                        </div>
-                        <div>
-                            <b>Bank:</b><span>{{ env('BANK_BANK_NAME_2') }}</span>
-                        </div>
-                        <div>
-                            <b>A/C No:</b><span>{{ env('BANK_ACCOUNT_NUMBER_2') }}</span>
-                        </div>
-                        <div>
-                            <b>IFSC Code:</b><span>{{ env('BANK_IFSC_CODE_2') }}</span>
-                        </div>
-                        @if (env('BANK_MICR_CODE_2'))
-                        <div>
-                            <b>MICR Code:</b><span>{{ env('BANK_MICR_CODE_2') }}</span>
-                        </div>
-                        @endif
-                        @if (env('BANK_BRANCH_ADDRESS_2'))
-                        <div>
-                            <b>Branch Address:</b><span>{{ env('BANK_BRANCH_ADDRESS_2') }}</span>
-                        </div>
-                        @endif
-                    </div>
-                </div>
-                @endif
+                @endforeach
             </div>
-            @endif
+
         </div>
         @endif
 

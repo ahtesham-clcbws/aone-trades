@@ -30,16 +30,23 @@
     </x-mary-card>
     <x-mary-modal wire:model="addDownload" class="backdrop-blur" persistent>
         <x-mary-form wire:submit="saveForm" no-separator>
-            <x-mary-file wire:model="image" accept="image/*">
-                <img src="{{ $image ?? '/img/placeholder.jpeg' }}" class="h-40 rounded-lg" />
-            </x-mary-file>
+            @if ($image || $editDownload?->image)
+            <img src="{{ $image && $image?->temporaryUrl() ? $image?->temporaryUrl() : ($editDownload?->image ? '/storage/'.$editDownload->image : '/img/placeholder.jpeg') }}" class="h-auto w-full rounded-lg" />
+            @endif
+            <x-mary-file wire:model.live="image" accept="image/png, image/jpeg" class="*:w-full" />
             <x-mary-input label="Title" wire:model="title" inline required />
             <x-mary-textarea label="Details" wire:model="details" max="1000" rows="3" inline required />
-            <x-mary-file wire:model="file" label="Downloadable file" accept=".exe,.apk,.zip,.msi,application/vnd.microsoft.portable-executable,application/x-msi,application/x-msdownload,application/x-zip-compressed,application/zip,application/octet-stream" class="*:w-full" />
+
+            @if ($oldFile || $editDownload?->file)
+            <p class="italic break-all text-error">{{$editDownload?->file ?? $oldFile}}</p>
+            @endif
+            <x-mary-file wire:model="file" label="{{ $editDownload?->file ? 'Change Downloadable file' : 'Downloadable file' }}"
+                accept=".exe,.apk,.msi"
+                class="*:w-full" />
 
             <x-slot:actions>
                 <x-mary-button label="Save" type="submit" class="btn-primary" spinner="saveForm" />
-                <x-mary-button type="button" label="Cancel" @click="$wire.addDownload = false" />
+                <x-mary-button type="button" label="Cancel" wire:click="closeModal" @click="$wire.addDownload = false" />
             </x-slot:actions>
         </x-mary-form>
     </x-mary-modal>

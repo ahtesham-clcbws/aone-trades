@@ -104,4 +104,19 @@ class Table extends Component
             $this->error($th->getMessage());
         }
     }
+
+    public function banUnbanUser($id)
+    {
+        try {
+            $user = User::find($id);
+            $banStatus = $user->isBan;
+            $user->isBan = !$banStatus;
+            $message = $banStatus ? 'Ban' : 'Un-Ban';
+            $user->save();
+            $this->success('User ' . $message . ' successfully');
+            // $this->js('window.location.reload()');
+        } catch (\Throwable $th) {
+            $this->error($th->getMessage());
+        }
+    }
 }

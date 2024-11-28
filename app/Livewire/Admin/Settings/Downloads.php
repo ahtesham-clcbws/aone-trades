@@ -22,14 +22,20 @@ class Downloads extends Component
 
     public $editDownload = null;
     // form properties
-    #[Validate('required|image')]
+    #[Validate('image')]
     public $image;
     #[Validate('required|min:5')]
     public $title;
     #[Validate('required|min:5')]
     public $details;
-    #[Validate('file|mimes:exe,apk,msi,zip|max:102400')] // 100MB
+    // #[Validate('file|mimes:exe,apk,msi,zip|max:102400')] // 100MB
+    // #[Validate('file|mimes:exe,apk,msi,zip|mimetypes:application/vnd.android.package-archive,application/x-msdownload,application/x-zip-compressed,application/octet-stream|max:102400')]
+
+    #[Validate('file|mimes:exe,apk,msi|max:102400')] // 100MB
     public $file;
+
+    public $oldImage = null;
+    public $oldFile = null;
 
     public function render()
     {
@@ -76,16 +82,29 @@ class Downloads extends Component
         try {
             $this->validate();
 
-            $imagePath = null;
-            if($this->image){
-                $imagePath = $this->image->store('downloads/image', 'public');
+            if (!$this->image && !$this->oldImage && !$this->editDownload->image) {
+                $this->error('Image is required');
+                return;
+                // return error
             }
-            $filePath = null;
-            if($this->file){
-                $filePath = $this->file->store('downloads/file', 'public');
+            if (!$this->file && !$this->oldFile && !$this->editDownload->file) {
+                // return error
+                $this->error('Downloadable file is required');
+                return;
             }
 
-            if($this->file){}
+            $imagePath = $this->oldImage;
+            if ($this->image) {
+                $imagePath = $this->image->store('downloads/image', 'public');
+            }
+            $filePath = $this->oldFile;
+            if ($this->file) {
+                // logger('Uploaded file MIME type: ' . $this->file->getMimeType());
+                // $filePath = $this->file->store('downloads/file', 'public');
+                $filePath = $this->file->storeAs('downloads/file', $this->file->getClientOriginalName(), 'public');
+            }
+
+
             $formData = [
                 'image' => $imagePath,
                 'title' => $this->title,
@@ -109,15 +128,25 @@ class Downloads extends Component
 
             $this->editDownload = $download;
 
-            $this->image = $download->image;
+            $this->oldImage = $download->image;
             $this->title = $download->title;
             $this->details = $download->details;
-            $this->file = $download->file;
+            $this->oldFile = $download->file;
 
             $this->addDownload = true;
         } catch (\Throwable $th) {
             $this->error($th->getMessage());
         }
+    }
+    public function closeModal()
+    {
+        $this->editDownload = null;
+
+        $this->oldImage = null;
+        $this->title = '';
+        $this->details = '';
+        $this->oldFile = null;
+        $this->addDownload = \false;
     }
 
     public function update()
@@ -125,11 +154,11 @@ class Downloads extends Component
         try {
             $this->editDownload->title = $this->title;
             $this->editDownload->details = $this->details;
-            if($this->image){
+            if ($this->image) {
                 $imagePath = $this->image->store('downloads/image', 'public');
                 $this->editDownload->image = $imagePath;
             }
-            if($this->file){
+            if ($this->file) {
                 $filePath = $this->file->store('downloads/file', 'public');
                 $this->editDownload->file = $filePath;
             }
@@ -149,7 +178,6 @@ class Downloads extends Component
             Download::destroy($id);
             $this->success('Delete Successfully.');
         } catch (\Throwable $th) {
-            report($th->getMessage());
             $this->error($th->getMessage());
         }
     }

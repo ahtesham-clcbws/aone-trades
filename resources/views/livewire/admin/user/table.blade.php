@@ -43,6 +43,7 @@
             @scope('cell_actions', $user)
             <div class="flex gap-2">
                 <x-mary-button icon="o-eye" class="btn-circle btn-sm bg-blue-500" title="View User" spinner="viewUser('{{$user->id}}')" wire:click="viewUser('{{$user->id}}')" />
+                <input type="checkbox" title="<?= $user->isBan ? 'Un-Ban User' : 'Ban User' ?>" class="toggle toggle-primary" <?= $user->isBan ? '' : 'checked' ?> spinner="banUnbanUser('{{$user->id}}')" wire:click="banUnbanUser('{{$user->id}}')" />
             </div>
             @endscope
         </x-mary-table>

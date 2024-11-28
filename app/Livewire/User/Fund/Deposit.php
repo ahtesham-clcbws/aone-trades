@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User\Fund;
 
+use App\Models\DespositDetails;
 use App\Models\UserDeposit;
 use Livewire\Component;
 
@@ -57,6 +58,14 @@ class Deposit extends Component
 
     public function render()
     {
-        return view('livewire.user.fund.deposit');
+        $depositDetailsTether = DespositDetails::where('type', 'tether')->orderByDesc('id')->get();
+        $depositDetailsUPI = DespositDetails::where('type', 'upi')->orderByDesc('id')->get();
+        $depositDetailsBank = DespositDetails::where('type', 'bank')->orderByDesc('id')->get();
+
+        return view('livewire.user.fund.deposit', [
+            'depositDetailsTether' => $depositDetailsTether,
+            'depositDetailsUPI' => $depositDetailsUPI,
+            'depositDetailsBank' => $depositDetailsBank,
+        ]);
     }
 }

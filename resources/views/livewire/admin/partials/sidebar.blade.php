@@ -18,5 +18,6 @@
 
     <x-mary-menu-item title="Help/Support Section" icon="o-lifebuoy" link="{{ route('admin.settings.help') }}" />
     <x-mary-menu-item title="Downloads Section" icon="o-arrow-down-tray" link="{{ route('admin.settings.downloads') }}" />
+    <x-mary-menu-item title="Deposit Details" icon="o-information-circle" link="{{ route('admin.settings.deposit-details') }}" />
     <x-mary-menu-item title="View Visitors" icon="o-chart-bar-square" link="{{ route('admin.visitors') }}" />
 </x-mary-menu>
