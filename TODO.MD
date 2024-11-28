@@ -62,3 +62,10 @@ User download section, Downloads not working - RESOLVED
 Need Deposit details settings page in admin panel for Tether, UPI, & Bank Details, so it will reflet into User Dashboard - DONE
 This statistics should be linked with their respective links - DONE
 User Ban/Un-Ban - DONE
+<<<<<<< HEAD
+=======
+
+https://aonetrades.com/cpanel
+aonetrades
+Z~9wexk,4yya
+>>>>>>> 6a0c5d5 (update 28th nov)
