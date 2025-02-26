@@ -29,6 +29,7 @@
                             <h4><span>Resources</span></h4>
                             <ul class="uk-list uk-link-text">
                                 <li><a href="{{ route('paymentMethods') }}">Payment methods</a></li>
+                                <li><a href="{{ route('privacyPolicy') }}">Privacy Policy</a></li>
                             </ul>
                         </div>
                         <div>
