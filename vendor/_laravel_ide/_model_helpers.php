@@ -5,28 +5,6 @@ namespace App\Models {
     /**
      * App\Models\DespositDetails
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string|null $branch_address
-     * @property string|null $micr_code
-     * @property string|null $ifsc_code
-     * @property string|null $account_name
-     * @property string|null $bank_name
-     * @property string|null $qr_code
-     * @property string $address
-     * @property mixed $type
-     * @property int $id
-     * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails whereType($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails whereAddress($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails whereQrCode($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails whereBankName($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails whereAccountName($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails whereIfscCode($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails whereMicrCode($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails whereBranchAddress($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|DespositDetails query()
@@ -263,20 +241,6 @@ namespace App\Models {
     /**
      * App\Models\Download
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string $file
-     * @property string $details
-     * @property string $title
-     * @property string $image
-     * @property int $id
-     * @method static \Illuminate\Database\Eloquent\Builder|Download whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Download whereImage($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Download whereTitle($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Download whereDetails($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Download whereFile($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Download whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Download whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|Download newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Download newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Download query()
@@ -513,23 +477,7 @@ namespace App\Models {
     /**
      * App\Models\Help
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property boolean $in_kyc
-     * @property boolean $in_help
-     * @property string $answer
-     * @property string $question
-     * @property mixed $help_category_id
-     * @property int $id
      * @property-read \App\Models\HelpCategory $category
-     * @method static \Illuminate\Database\Eloquent\Builder|Help whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Help whereHelpCategoryId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Help whereQuestion($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Help whereAnswer($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Help whereInHelp($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Help whereInKyc($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Help whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Help whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|Help newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Help newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Help query()
@@ -766,16 +714,6 @@ namespace App\Models {
     /**
      * App\Models\HelpCategory
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string $key
-     * @property string $name
-     * @property int $id
-     * @method static \Illuminate\Database\Eloquent\Builder|HelpCategory whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|HelpCategory whereName($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|HelpCategory whereKey($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|HelpCategory whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|HelpCategory whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|HelpCategory newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|HelpCategory newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|HelpCategory query()
@@ -1012,19 +950,7 @@ namespace App\Models {
     /**
      * App\Models\IbPartnerRequest
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string|null $reject_notes
-     * @property mixed $status
-     * @property mixed $user_id
-     * @property int $id
      * @property-read \App\Models\User $user
-     * @method static \Illuminate\Database\Eloquent\Builder|IbPartnerRequest whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|IbPartnerRequest whereUserId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|IbPartnerRequest whereStatus($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|IbPartnerRequest whereRejectNotes($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|IbPartnerRequest whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|IbPartnerRequest whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|IbPartnerRequest newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|IbPartnerRequest newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|IbPartnerRequest query()
@@ -1261,36 +1187,6 @@ namespace App\Models {
     /**
      * App\Models\PageView
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string|null $timezone
-     * @property float|null $long
-     * @property float|null $lat
-     * @property string|null $zip
-     * @property string|null $city
-     * @property string|null $state
-     * @property string|null $country
-     * @property string|null $ip
-     * @property string|null $referer
-     * @property string|null $user_agent
-     * @property string|null $path
-     * @property string|null $session_id
-     * @property int $id
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereSessionId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView wherePath($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereUserAgent($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereReferer($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereIp($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereCountry($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereState($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereCity($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereZip($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereLat($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereLong($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereTimezone($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|PageView whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|PageView newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|PageView newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|PageView query()
@@ -1527,20 +1423,6 @@ namespace App\Models {
     /**
      * App\Models\Timezone
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string $timezone
-     * @property string $abbr
-     * @property string $offset
-     * @property string $name
-     * @property int $id
-     * @method static \Illuminate\Database\Eloquent\Builder|Timezone whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Timezone whereName($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Timezone whereOffset($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Timezone whereAbbr($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Timezone whereTimezone($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Timezone whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|Timezone whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|Timezone newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Timezone newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Timezone query()
@@ -1777,19 +1659,7 @@ namespace App\Models {
     /**
      * App\Models\TradingAccountRequest
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string|null $reject_notes
-     * @property mixed $status
-     * @property mixed $user_id
-     * @property int $id
      * @property-read \App\Models\User $user
-     * @method static \Illuminate\Database\Eloquent\Builder|TradingAccountRequest whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|TradingAccountRequest whereUserId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|TradingAccountRequest whereStatus($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|TradingAccountRequest whereRejectNotes($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|TradingAccountRequest whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|TradingAccountRequest whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|TradingAccountRequest newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|TradingAccountRequest newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|TradingAccountRequest query()
@@ -2026,11 +1896,8 @@ namespace App\Models {
     /**
      * App\Models\User
      *
-     * @property bool $isBan
-     * @property string|null $password_view
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
-     * @property boolean $isActive
      * @property string|null $profile_photo_path
      * @property mixed $current_team_id
      * @property string|null $remember_token
@@ -2038,24 +1905,52 @@ namespace App\Models {
      * @property string|null $two_factor_recovery_codes
      * @property string|null $two_factor_secret
      * @property string $password
-     * @property mixed $package
-     * @property string|null $country
-     * @property string|null $state
-     * @property string|null $city
+     * @property string|null $verification_code
+     * @property bool $is_assign
+     * @property string $watch_history
+     * @property string|null $social_links
+     * @property string|null $biography
+     * @property string|null $title
+     * @property string $wishlist
+     * @property bool $is_instructor
+     * @property string|null $five_min_demo
+     * @property string|null $responsibilities
+     * @property string|null $spare_time
+     * @property string|null $hobbies
+     * @property string|null $occupation
+     * @property string|null $if_left
+     * @property string|null $what_level
+     * @property string|null $alquran_when
+     * @property string|null $degree
+     * @property string|null $goal
+     * @property string|null $teach_timing
+     * @property string|null $teach_course
+     * @property string|null $training_course
+     * @property string|null $other_course
+     * @property string|null $doing_course
+     * @property string|null $quran_course
+     * @property string|null $teach_pattern
+     * @property string|null $alquran
+     * @property string|null $language
+     * @property string|null $gender
+     * @property mixed $age
      * @property mixed $pincode
      * @property string|null $address
-     * @property string $timezone
-     * @property mixed $gender
-     * @property string|null $date_of_birth
-     * @property mixed $role
-     * @property string|null $phone_number
+     * @property string|null $phone_verified_at
+     * @property string|null $phone
      * @property \Illuminate\Support\Carbon|null $email_verified_at
      * @property string $email
-     * @property string|null $lastname
-     * @property string|null $firstname
+     * @property string|null $last_name
+     * @property string $first_name
+     * @property mixed $batch_id
+     * @property mixed $course_id
+     * @property mixed $city_id
+     * @property mixed $state_id
+     * @property mixed $country_id
+     * @property mixed $role_id
      * @property int $id
-     * @property-read mixed $name
      * @property-read mixed $status
+     * @property-read mixed $name
      * @property-read mixed $is_i_b_partner
      * @property-read mixed $is_trading_account
      * @property-read mixed $profile_photo_url
@@ -2075,21 +1970,49 @@ namespace App\Models {
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
      * @property-read int|null $notifications_count
      * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User whereFirstname($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User whereLastname($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereRoleId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereCountryId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereStateId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereCityId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereCourseId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereBatchId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereFirstName($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereLastName($value)
      * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
      * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User wherePhoneNumber($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User whereDateOfBirth($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User whereGender($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User whereTimezone($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User wherePhone($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User wherePhoneVerifiedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|User whereAddress($value)
      * @method static \Illuminate\Database\Eloquent\Builder|User wherePincode($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User whereCity($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User whereState($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User whereCountry($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User wherePackage($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereAge($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereGender($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereLanguage($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereAlquran($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereTeachPattern($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereQuranCourse($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereDoingCourse($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereOtherCourse($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereTrainingCourse($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereTeachCourse($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereTeachTiming($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereGoal($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereDegree($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereAlquranWhen($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereWhatLevel($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereIfLeft($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereOccupation($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereHobbies($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereSpareTime($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereResponsibilities($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereFiveMinDemo($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereIsInstructor($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereWishlist($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereTitle($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereBiography($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereSocialLinks($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereWatchHistory($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereIsAssign($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|User whereVerificationCode($value)
      * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
      * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
      * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorRecoveryCodes($value)
@@ -2097,11 +2020,8 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
      * @method static \Illuminate\Database\Eloquent\Builder|User whereCurrentTeamId($value)
      * @method static \Illuminate\Database\Eloquent\Builder|User whereProfilePhotoPath($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User whereIsactive($value)
      * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User wherePasswordView($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|User whereIsban($value)
      * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|User query()
@@ -2338,23 +2258,7 @@ namespace App\Models {
     /**
      * App\Models\UserDeposit
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string|null $reject_notes
-     * @property mixed $status
-     * @property string|null $deposit_receipt
-     * @property float|null $amount
-     * @property mixed $user_id
-     * @property int $id
      * @property-read \App\Models\User $user
-     * @method static \Illuminate\Database\Eloquent\Builder|UserDeposit whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserDeposit whereUserId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserDeposit whereAmount($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserDeposit whereDepositReceipt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserDeposit whereStatus($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserDeposit whereRejectNotes($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserDeposit whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserDeposit whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|UserDeposit newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|UserDeposit newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|UserDeposit query()
@@ -2591,25 +2495,7 @@ namespace App\Models {
     /**
      * App\Models\UserKyc
      *
-     * @property string|null $address_proof_file_back
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string|null $reject_notes
-     * @property mixed $status
-     * @property string|null $address_proof_file
-     * @property string|null $pancard_file
-     * @property mixed $user_id
-     * @property int $id
      * @property-read \App\Models\User $user
-     * @method static \Illuminate\Database\Eloquent\Builder|UserKyc whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserKyc whereUserId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserKyc wherePancardFile($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserKyc whereAddressProofFile($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserKyc whereStatus($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserKyc whereRejectNotes($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserKyc whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserKyc whereUpdatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserKyc whereAddressProofFileBack($value)
      * @method static \Illuminate\Database\Eloquent\Builder|UserKyc newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|UserKyc newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|UserKyc query()
@@ -2846,23 +2732,7 @@ namespace App\Models {
     /**
      * App\Models\UserPlanRequest
      *
-     * @property string|null $reject_notes
-     * @property string $current_package
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property mixed $status
-     * @property mixed $package
-     * @property mixed $user_id
-     * @property int $id
      * @property-read \App\Models\User $user
-     * @method static \Illuminate\Database\Eloquent\Builder|UserPlanRequest whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserPlanRequest whereUserId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserPlanRequest wherePackage($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserPlanRequest whereStatus($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserPlanRequest whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserPlanRequest whereUpdatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserPlanRequest whereCurrentPackage($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserPlanRequest whereRejectNotes($value)
      * @method static \Illuminate\Database\Eloquent\Builder|UserPlanRequest newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|UserPlanRequest newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|UserPlanRequest query()
@@ -3099,26 +2969,6 @@ namespace App\Models {
     /**
      * App\Models\UserTransferDetail
      *
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property bool $isActive
-     * @property string|null $ifsc_code
-     * @property string|null $bank_branch
-     * @property string|null $bank_name
-     * @property string|null $address
-     * @property mixed $type
-     * @property mixed $user_id
-     * @property int $id
-     * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail whereUserId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail whereType($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail whereAddress($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail whereBankName($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail whereBankBranch($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail whereIfscCode($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail whereIsactive($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|UserTransferDetail query()
@@ -3355,34 +3205,8 @@ namespace App\Models {
     /**
      * App\Models\UserWithdrawl
      *
-     * @property string|null $ifsc_code
-     * @property string|null $bank_branch
-     * @property string|null $bank_name
-     * @property string|null $address
-     * @property mixed $type
-     * @property \Illuminate\Support\Carbon|null $updated_at
-     * @property \Illuminate\Support\Carbon|null $created_at
-     * @property string|null $reject_notes
-     * @property mixed $status
-     * @property string|null $user_comments
-     * @property float|null $amount
-     * @property mixed $user_id
-     * @property int $id
      * @property-read mixed $transfer
      * @property-read \App\Models\User $user
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereUserId($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereAmount($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereUserComments($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereStatus($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereRejectNotes($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereCreatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereUpdatedAt($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereType($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereAddress($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereBankName($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereBankBranch($value)
-     * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl whereIfscCode($value)
      * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|UserWithdrawl query()
