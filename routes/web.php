@@ -39,6 +39,7 @@ use App\Livewire\Admin\Settings\Help as AdminHelpSection;
 use App\Livewire\Admin\Settings\Downloads as AdminDownloadsSection;
 use App\Livewire\Admin\User\IBPartnerRequest;
 use App\Livewire\Admin\User\TradingAccountRequest;
+use App\Livewire\Website\Pages\Policies\PrivacyPolicy;
 use Illuminate\Support\Facades\Artisan;
 
 Route::get('artisan/{command}', function ($command) {
@@ -62,6 +63,7 @@ Route::get('artisan/{command}', function ($command) {
 //     //     'REQUEST' => $_REQUEST
 //     // ]);
 // });
+
 Route::get('/', Homepage::class)->name('homepage');
 
 Route::get('info', Info::class)->name('info');
@@ -73,6 +75,8 @@ Route::get('forex', Forex::class)->name('forex');
 Route::get('synthetic-indices', SyntheticIndices::class)->name('syntheticIndices');
 Route::get('commodities', Commodities::class)->name('commodities');
 Route::get('payment-methods', PaymentMethods::class)->name('paymentMethods');
+
+Route::get('privacy-policy', PrivacyPolicy::class)->name('privacyPolicy');
 
 Route::middleware([
     'auth:sanctum',

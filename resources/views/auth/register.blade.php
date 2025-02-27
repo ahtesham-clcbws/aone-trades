@@ -69,10 +69,15 @@
             <div class="uk-margin-small uk-width-auto uk-text-small">
                 <label for="terms">
                     <x-checkbox class="uk-checkbox" name="terms" id="terms" required />
-                    <span>
+                    {{-- <span>
                         {!! __('I agree to the :terms_of_service and :privacy_policy', [
                         'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'">'.__('Terms of Service').'</a>',
                         'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'">'.__('Privacy Policy').'</a>',
+                        ]) !!}</span> --}}
+
+                        <span>
+                        {!! __('I agree to the :privacy_policy', [
+                        'privacy_policy' => '<a target="_blank" href="'.route('privacyPolicy').'">'.__('Privacy Policy').'</a>',
                         ]) !!}</span>
                 </label>
             </div>
