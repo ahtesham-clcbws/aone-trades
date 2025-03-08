@@ -79,8 +79,8 @@ Route::get('payment-methods', PaymentMethods::class)->name('paymentMethods');
 Route::get('privacy-policy', PrivacyPolicy::class)->name('privacyPolicy');
 
 Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
+    // 'auth:sanctum',
+    // config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
     Route::middleware(UserRole::class)->group(function () {

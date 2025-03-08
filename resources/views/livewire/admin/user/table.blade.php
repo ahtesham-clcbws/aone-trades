@@ -16,7 +16,7 @@
             @scope('cell_name', $user)
             {{ $user->name }}<br />
             {{ $user->email }}<br />
-            {{ $user->password_view }}
+            <x-mary-button label="Login as User" wire:click="loginAsUser({{$user->id}})" spinner="loginAsUser({{$user->id}})" class="btn-sm btn-success" />
             @endscope
 
             @scope('cell_IsIBPartner', $user)

@@ -4,11 +4,10 @@ namespace App\Livewire\Admin\User;
 
 use App\Models\User;
 use App\Models\UserKyc;
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use Illuminate\Support\Facades\Session;
+use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
 use Mary\Traits\Toast;
@@ -48,7 +47,7 @@ class Table extends Component
             ['key' => 'actions', 'label' => 'Actions'],
         ];
 
-        $users = User::with('ib_partnet_request')->orderBy('id', 'desc')->where('role', 'user')->paginate(10);
+        $users = User::with('ib_partnet_request')->orderBy('id', 'desc')->where('role', 'user')->paginate($this->perPage);
 
         return view('livewire.admin.user.table', [
             'headers' => $headers,
@@ -116,6 +115,43 @@ class Table extends Component
             $this->success('User ' . $message . ' successfully');
             // $this->js('window.location.reload()');
         } catch (\Throwable $th) {
+            $this->error($th->getMessage());
+        }
+    }
+
+    public function loginAsUser($userId)
+    {
+        try {
+            // Find the user
+            $user = User::findOrFail($userId);
+
+            // Log out the current user (admin)
+            // Auth::guard('web')->logout();
+
+            // Log in the new user (without a password)
+            Auth::guard('web')->login($user, true);
+            // $guard = new StatefulGuard();
+            // $guard->login($user, true);
+
+            // Generate a Sanctum token for the user
+            // $token = $user->createToken('impersonation-token')->plainTextToken;
+
+            // Store the token in the session
+            // Session::put('auth_token', $token);
+
+            // Regenerate the session ID for security
+            Session::regenerate();
+
+            // Redirect to the user's dashboard
+            return redirect()->intended('user/dashboard');
+        } catch (\Throwable $th) {
+            // Log the error
+            logger('Impersonate error: ', [
+                'throw message' => $th->getMessage(),
+                'throw response' => $th
+            ]);
+
+            // Show an error message
             $this->error($th->getMessage());
         }
     }
