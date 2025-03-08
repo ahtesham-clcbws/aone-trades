@@ -7,7 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'voku\\' => array($vendorDir . '/voku/portable-ascii/src/voku'),
-    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
+    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/type-resolver/src', $vendorDir . '/phpdocumentor/reflection-docblock/src'),
     'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'TijsVerkoyen\\CssToInlineStyles\\' => array($vendorDir . '/tijsverkoyen/css-to-inline-styles/src'),
@@ -48,7 +48,7 @@ return array(
     'Psy\\' => array($vendorDir . '/psy/psysh/src'),
     'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/src'),
-    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
+    'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src', $vendorDir . '/psr/http-factory/src'),
     'Psr\\Http\\Client\\' => array($vendorDir . '/psr/http-client/src'),
     'Psr\\EventDispatcher\\' => array($vendorDir . '/psr/event-dispatcher/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
@@ -87,8 +87,8 @@ return array(
     'Laravel\\Pail\\' => array($vendorDir . '/laravel/pail/src'),
     'Laravel\\Jetstream\\' => array($vendorDir . '/laravel/jetstream/src'),
     'Laravel\\Fortify\\' => array($vendorDir . '/laravel/fortify/src'),
-    'Jfcherng\\Utility\\' => array($vendorDir . '/jfcherng/php-color-output/src', $vendorDir . '/jfcherng/php-mb-string/src'),
-    'Jfcherng\\Diff\\' => array($vendorDir . '/jfcherng/php-diff/src', $vendorDir . '/jfcherng/php-sequence-matcher/src'),
+    'Jfcherng\\Utility\\' => array($vendorDir . '/jfcherng/php-mb-string/src', $vendorDir . '/jfcherng/php-color-output/src'),
+    'Jfcherng\\Diff\\' => array($vendorDir . '/jfcherng/php-sequence-matcher/src', $vendorDir . '/jfcherng/php-diff/src'),
     'Jean85\\' => array($vendorDir . '/jean85/pretty-package-versions/src'),
     'Illuminate\\Support\\' => array($vendorDir . '/laravel/framework/src/Illuminate/Macroable', $vendorDir . '/laravel/framework/src/Illuminate/Collections', $vendorDir . '/laravel/framework/src/Illuminate/Conditionable'),
     'Illuminate\\' => array($vendorDir . '/laravel/framework/src/Illuminate'),

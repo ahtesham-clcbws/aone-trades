@@ -75,7 +75,7 @@
                         'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'">'.__('Privacy Policy').'</a>',
                         ]) !!}</span> --}}
 
-                        <span>
+                    <span>
                         {!! __('I agree to the :privacy_policy', [
                         'privacy_policy' => '<a target="_blank" href="'.route('privacyPolicy').'">'.__('Privacy Policy').'</a>',
                         ]) !!}</span>

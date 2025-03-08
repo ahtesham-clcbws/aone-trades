@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974
+class ComposerStaticInitb071f6d14067b48fb2fd6b443ffd008b
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -236,8 +236,8 @@ class ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
         'Whoops\\' => 
         array (
@@ -401,8 +401,8 @@ class ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -558,13 +558,13 @@ class ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974
         ),
         'Jfcherng\\Utility\\' => 
         array (
-            0 => __DIR__ . '/..' . '/jfcherng/php-color-output/src',
-            1 => __DIR__ . '/..' . '/jfcherng/php-mb-string/src',
+            0 => __DIR__ . '/..' . '/jfcherng/php-mb-string/src',
+            1 => __DIR__ . '/..' . '/jfcherng/php-color-output/src',
         ),
         'Jfcherng\\Diff\\' => 
         array (
-            0 => __DIR__ . '/..' . '/jfcherng/php-diff/src',
-            1 => __DIR__ . '/..' . '/jfcherng/php-sequence-matcher/src',
+            0 => __DIR__ . '/..' . '/jfcherng/php-sequence-matcher/src',
+            1 => __DIR__ . '/..' . '/jfcherng/php-diff/src',
         ),
         'Jean85\\' => 
         array (
@@ -728,6 +728,7 @@ class ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974
         'App\\Livewire\\Admin\\Dashboard' => __DIR__ . '/../..' . '/app/Livewire/Admin/Dashboard.php',
         'App\\Livewire\\Admin\\Deposit\\Requests' => __DIR__ . '/../..' . '/app/Livewire/Admin/Deposit/Requests.php',
         'App\\Livewire\\Admin\\Partials\\Sidebar' => __DIR__ . '/../..' . '/app/Livewire/Admin/Partials/Sidebar.php',
+        'App\\Livewire\\Admin\\Settings\\DepositDetailsSettings' => __DIR__ . '/../..' . '/app/Livewire/Admin/Settings/DepositDetailsSettings.php',
         'App\\Livewire\\Admin\\Settings\\Downloads' => __DIR__ . '/../..' . '/app/Livewire/Admin/Settings/Downloads.php',
         'App\\Livewire\\Admin\\Settings\\Help' => __DIR__ . '/../..' . '/app/Livewire/Admin/Settings/Help.php',
         'App\\Livewire\\Admin\\User\\IBPartnerRequest' => __DIR__ . '/../..' . '/app/Livewire/Admin/User/IBPartnerRequest.php',
@@ -766,6 +767,7 @@ class ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974
         'App\\Livewire\\Website\\Pages\\Info' => __DIR__ . '/../..' . '/app/Livewire/Website/Pages/Info.php',
         'App\\Livewire\\Website\\Pages\\LogIn' => __DIR__ . '/../..' . '/app/Livewire/Website/Pages/LogIn.php',
         'App\\Livewire\\Website\\Pages\\PaymentMethods' => __DIR__ . '/../..' . '/app/Livewire/Website/Pages/PaymentMethods.php',
+        'App\\Livewire\\Website\\Pages\\Policies\\PrivacyPolicy' => __DIR__ . '/../..' . '/app/Livewire/Website/Pages/Policies/PrivacyPolicy.php',
         'App\\Livewire\\Website\\Pages\\Register' => __DIR__ . '/../..' . '/app/Livewire/Website/Pages/Register.php',
         'App\\Livewire\\Website\\Pages\\SyntheticIndices' => __DIR__ . '/../..' . '/app/Livewire/Website/Pages/SyntheticIndices.php',
         'App\\Livewire\\Website\\Partials\\Footer' => __DIR__ . '/../..' . '/app/Livewire/Website/Partials/Footer.php',
@@ -773,6 +775,7 @@ class ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974
         'App\\Mail\\AdminNotificationEmail' => __DIR__ . '/../..' . '/app/Mail/AdminNotificationEmail.php',
         'App\\Mail\\NotificationEmail' => __DIR__ . '/../..' . '/app/Mail/NotificationEmail.php',
         'App\\Mail\\Welcome' => __DIR__ . '/../..' . '/app/Mail/Welcome.php',
+        'App\\Models\\DespositDetails' => __DIR__ . '/../..' . '/app/Models/DespositDetails.php',
         'App\\Models\\Download' => __DIR__ . '/../..' . '/app/Models/Download.php',
         'App\\Models\\Help' => __DIR__ . '/../..' . '/app/Models/Help.php',
         'App\\Models\\HelpCategory' => __DIR__ . '/../..' . '/app/Models/HelpCategory.php',
@@ -8445,9 +8448,9 @@ class ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit589cc0f65c3aaa7d4e9024d545bc1974::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb071f6d14067b48fb2fd6b443ffd008b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb071f6d14067b48fb2fd6b443ffd008b::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitb071f6d14067b48fb2fd6b443ffd008b::$classMap;
 
         }, null, ClassLoader::class);
     }
