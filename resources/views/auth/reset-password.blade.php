@@ -1,36 +1,57 @@
 <x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
 
+    <div class="uk-text-center in-padding-horizontal@s">
         <x-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('password.update') }}">
+        @session('status')
+        <div class="mb-4 font-medium text-sm text-green-600">
+            {{ $value }}
+        </div>
+        @endsession
+        <a class="uk-logo" href="/">
+            <img src="/img/w-logo.png" data-src="/img/w-logo.png" alt="logo" width="269" height="23"
+                data-uk-img="" />
+        </a>
+        <p class="uk-text-lead uk-margin-top">
+            Reset Your Password
+        </p>
+        <!-- login form begin -->
+        <form class="uk-grid uk-form" method="POST" action="{{ route('password.update') }}">
             @csrf
 
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-            <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
+            <div class="uk-margin-small uk-width-1-1 uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip fas fa-envelope fa-sm"></span>
+                <input class="uk-input uk-border-rounded" id="email" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username"
+                    placeholder="Email Id" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+            <div class="uk-margin-small uk-width-1-1 uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
+                <input class="uk-input uk-border-rounded" id="password" type="password" name="password" required autocomplete="new-password"
+                    placeholder="Password" />
+            </div>
+            <div class="uk-margin-small uk-width-1-1 uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
+                <input class="uk-input uk-border-rounded" id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password"
+                    placeholder="Confirm Password" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Reset Password') }}
-                </x-button>
+            <div class="uk-margin-small uk-width-1-1">
+                <button class="uk-button uk-width-1-1 uk-button-primary uk-border-rounded uk-float-left"
+                    type="submit" name="submit"id="linkButton">
+                    Reset Password
+                </button>
             </div>
         </form>
-    </x-authentication-card>
+
+    </div>
+
+    <script>
+        document.getElementById('linkButton').addEventListener('click', function() {
+            document.getElementById('linkButton').innerHTML = 'Resetting please wait..';
+        });
+    </script>
+
 </x-guest-layout>

@@ -1,28 +1,44 @@
 <x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
-        </div>
-
+    <div class="uk-text-center in-padding-horizontal@s">
         <x-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('password.confirm') }}">
+        @session('status')
+        <div class="mb-4 font-medium text-sm text-green-600">
+            {{ $value }}
+        </div>
+        @endsession
+        <a class="uk-logo" href="/">
+            <img src="/img/w-logo.png" data-src="/img/w-logo.png" alt="logo" width="269" height="23"
+                data-uk-img="" />
+        </a>
+        <p class="uk-text-left uk-margin-top uk-text-small">
+            This is a secure area of the application. Please confirm your password before continuing.
+        </p>
+        <!-- login form begin -->
+        <form class="uk-grid uk-form" method="POST" action="{{ route('password.confirm') }}">
             @csrf
-
-            <div>
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" autofocus />
+            <div class="uk-margin-small uk-width-1-1 uk-inline">
+                <span class="uk-form-icon uk-form-icon-flip fas fa-lock fa-sm"></span>
+                <input class="uk-input uk-border-rounded" id="password" type="password" name="password" required autocomplete="current-password"
+                    placeholder="Password" />
             </div>
 
-            <div class="flex justify-end mt-4">
-                <x-button class="ms-4">
-                    {{ __('Confirm') }}
-                </x-button>
+            <div class="uk-margin-small uk-width-1-1">
+                <button class="uk-button uk-width-1-1 uk-button-primary uk-border-rounded uk-float-left"
+                    type="submit" name="submit" id="linkButton">
+                    Confirm
+                </button>
             </div>
         </form>
-    </x-authentication-card>
+        <span class="uk-text-small">
+            <a href="{{ route('login') }}">Back to login</a></span>
+    </div>
+
+    <script>
+        document.getElementById('linkButton').addEventListener('click', function() {
+            document.getElementById('linkButton').innerHTML = 'Confirming ..';
+        });
+    </script>
+
 </x-guest-layout>

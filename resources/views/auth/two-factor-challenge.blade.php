@@ -8,7 +8,7 @@
         </div>
         @endsession
         <a class="uk-logo" href="index.html">
-            <img src="img/w-logo.png" data-src="img/w-logo.png" alt="logo" width="269" height="23"
+            <img src="/img/w-logo.png" data-src="/img/w-logo.png" alt="logo" width="269" height="23"
                 data-uk-img="" />
         </a>
         <p class="uk-text-lead uk-margin-small-top uk-margin-medium-bottom">
